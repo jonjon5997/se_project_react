@@ -1,0 +1,25 @@
+.footer {
+  display: flex;
+  justify-content: space-between; /* Pushes items to the edges */
+  align-items: center; /* Aligns items vertically */
+  padding: 10px 20px; /* Adds space inside the footer */
+  background-color: #f8f9fa; /* Optional: footer background color */
+  font-size: 16px; /* Optional: font size for the text */
+  font-family: "Cabinet Grotesk", sans-serif;
+  max-width: 1360px;
+  margin: 0 auto;
+}
+
+.footer__name {
+  font-weight: bold; /* Makes the text bold */
+  width: 204px;
+  height: 20px;
+  top: 778px;
+  left: 40px;
+  gap: 0px;
+  opacity: 0px;
+}
+
+.footer__date {
+  color: #6c757d; /* Optional: grayish text for the date */
+}
