@@ -84,7 +84,8 @@ function App() {
       <ModalWithForm
         title="New Garment"
         buttonText="Add Garment"
-        activeModal={activeModal}
+        // activeModal={activeModal}
+        isOpen={activeModal === "add-garment"} // Neutral isOpen logic here
         handleCloseClick={closeActiveModal}
         handleSubmit={handleAddGarmentSubmit}
         clothingItems={clothingItems}
