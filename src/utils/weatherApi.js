@@ -38,3 +38,19 @@ const getWeatherType = (temperature) => {
     return "cold";
   }
 };
+
+export const parseWeatherData = (data) => {
+  const main = data.main;
+  const temperature = main && main.temp;
+  const weather = {
+    temperature: {
+      F: `${Math.round(temperature)}°F`,
+      C: `${Math.round(((temperature - 32) * 5) / 9)}°C`,
+    },
+  };
+  console.log(weather);
+  return weather;
+};
+
+// weather.temperature.F = data.main.temp;
+// weather.temperature.C = Math.round((data.main.temp - 32) * 5/9);

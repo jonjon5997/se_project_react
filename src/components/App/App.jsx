@@ -6,7 +6,11 @@ import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import Footer from "../Footer/Footer";
-import { getWeather, filterWeatherData } from "../../utils/weatherApi";
+import {
+  getWeather,
+  filterWeatherData,
+  parseWeatherData,
+} from "../../utils/weatherApi";
 import {
   coordinates,
   APIkey,
@@ -16,11 +20,14 @@ import {
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
 function App() {
-  const [weatherData, setWeatherData] = useState({
-    type: "",
-    temp: { F: 999 },
-    city: "",
-  }); //left part of object is variable name and the second part is the function you can use to change the variable -> variableName, setVariableName
+  const [weatherData, setWeatherData] = useState(
+    //   {
+    //   type: "",
+    //   temp: { F: 999 },
+    //   city: "",
+    // }
+    null
+  ); //left part of object is variable name and the second part is the function you can use to change the variable -> variableName, setVariableName
   // const [activeModal, setActiveModal] = useState("preview");
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({
@@ -29,6 +36,7 @@ function App() {
     link: "https://cdn.pixabay.com/photo/2024/11/26/12/50/ai-generated-9225728_1280.jpg",
     weather: "cold",
   });
+  const [temp, setTemp] = useState(null);
   const [clothingItems, setClothingItems] = useState([]);
 
   const [currentTempUnit, setCurrentTemperatureUnit] = useState("F");
@@ -71,12 +79,25 @@ function App() {
     });
   };
 
+  // useEffect(() => {
+  //   getWeather(coordinates, APIkey)
+  //     .then((data) => {
+  //       console.log("Weather API response:", data);
+  //       const filteredData = filterWeatherData(data);
+  //       const temperature = parseWeatherData(data);
+  //       setWeatherData(filteredData);
+  //       setTemp(temperature);
+  //     })
+  //     .catch(console.error);
+  // }, []);
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
         console.log("Weather API response:", data);
         const filteredData = filterWeatherData(data);
+        const parsedData = parseWeatherData(data); // Updated variable name for clarity
         setWeatherData(filteredData);
+        setTemp(parsedData.temperature); // Pass parsed temperature object
       })
       .catch(console.error);
   }, []);
@@ -87,8 +108,13 @@ function App() {
         value={{ currentTempUnit, handleToggleSwitchChange }}
       >
         <div className="page__content">
-          <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+          <Header
+            handleAddClick={handleAddClick}
+            weatherData={weatherData}
+            temp={temp}
+          />
           <Main
+            weatherTemp={temp}
             weatherData={weatherData}
             handleCardClick={handleCardClick}
             clothingItems={clothingItems}

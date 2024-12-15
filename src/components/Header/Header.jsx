@@ -2,8 +2,17 @@ import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import "./Header.css";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+import { useContext } from "react";
 
-function Header({ handleAddClick, weatherData }) {
+function Header({ handleAddClick, temp, weatherData }) {
+  const { currentTempUnit, handleToggleSwitchChange } = useContext(
+    CurrentTemperatureUnitContext
+  );
+
+  if (!weatherData || !temp) {
+    return null; // Or render a loading indicator
+  }
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -15,6 +24,10 @@ function Header({ handleAddClick, weatherData }) {
       <p className="header__date-and-location">
         {currentDate}, {weatherData.city}{" "}
       </p>
+      <div className="header__city">{weatherData.city}</div>
+      <div className="header__temp">
+        {temp[currentTempUnit]}°{currentTempUnit}
+      </div>
 
       <button
         onClick={handleAddClick}
