@@ -2,7 +2,7 @@
   display: flex;
   position: relative;
   width: 55px;
-  height: 35px;
+  height: 30px;
   /* outline: none; */
   border: 2px solid black;
   border-radius: 25px !important;
@@ -24,26 +24,26 @@
 }
 
 .switch__slider-F {
-  top: 3px;
-  left: 28px;
+  top: 0px;
+  left: 30px;
 }
 
 .switch__slider-C {
-  top: 3px;
-  left: 5px;
+  top: 0px;
+  left: 0px;
 }
 
 .switch__temp-C {
   position: absolute;
-  top: -7px;
-  left: 14px;
+  top: -10px;
+  left: 10px;
   color: white;
 }
 
 .switch__temp-F {
   position: absolute;
-  top: -7px;
-  left: 38px;
+  top: -12px;
+  left: 40px;
   color: white;
 }
 
