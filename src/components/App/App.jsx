@@ -19,6 +19,7 @@ import {
 } from "../../utils/constants";
 // import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   const [weatherData, setWeatherData] = useState(
@@ -111,26 +112,35 @@ function App() {
   }, []);
 
   return (
-    <div className="page">
-      <CurrentTemperatureUnitContext.Provider
-        value={{ currentTempUnit, handleToggleSwitchChange }}
-      >
-        <div className="page__content">
-          <Header
-            handleAddClick={handleAddClick}
-            weatherData={weatherData}
-            temp={temp}
-          />
-          <Main
-            weatherTemp={temp}
-            weatherData={weatherData}
-            handleCardClick={handleCardClick}
-            clothingItems={clothingItems}
-          />{" "}
-          {/* pass the variable to the main componenet as a prop*/}
-          <Footer />
-        </div>
-        {/* <ModalWithForm
+    <BrowserRouter>
+      <div className="page">
+        <CurrentTemperatureUnitContext.Provider
+          value={{ currentTempUnit, handleToggleSwitchChange }}
+        >
+          <div className="page__content">
+            <Header
+              handleAddClick={handleAddClick}
+              weatherData={weatherData}
+              temp={temp}
+            />
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Main
+                    weatherTemp={temp}
+                    weatherData={weatherData}
+                    handleCardClick={handleCardClick}
+                    clothingItems={clothingItems}
+                  />
+                }
+              ></Route>
+              <Route path="/profile" element={<p>Profile</p>}></Route>
+            </Routes>
+
+            <Footer />
+          </div>
+          {/* <ModalWithForm
           title="New Garment"
           buttonText="Add Garment"
           // activeModal={activeModal}
@@ -197,22 +207,23 @@ function App() {
             </label>
           </fieldset>
         </ModalWithForm> */}
-        {activeModal === "add-garment" && (
-          <AddItemModal
-            closeActiveModal={closeActiveModal}
-            isOpen={activeModal === "add-garment"}
-            onAddItem={onAddItem}
-          />
-        )}
-        {activeModal === "preview" && (
-          <ItemModal
-            activeModal={activeModal}
-            card={selectedCard}
-            handleCloseClick={closeActiveModal}
-          />
-        )}
-      </CurrentTemperatureUnitContext.Provider>
-    </div>
+          {activeModal === "add-garment" && (
+            <AddItemModal
+              closeActiveModal={closeActiveModal}
+              isOpen={activeModal === "add-garment"}
+              onAddItem={onAddItem}
+            />
+          )}
+          {activeModal === "preview" && (
+            <ItemModal
+              activeModal={activeModal}
+              card={selectedCard}
+              handleCloseClick={closeActiveModal}
+            />
+          )}
+        </CurrentTemperatureUnitContext.Provider>
+      </div>
+    </BrowserRouter>
   );
 }
 
