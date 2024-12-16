@@ -6,6 +6,7 @@ import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import Footer from "../Footer/Footer";
+import AddItemModal from "../../AddItemModal/AddItemModal";
 import {
   getWeather,
   filterWeatherData,
@@ -79,6 +80,13 @@ function App() {
     });
   };
 
+  const onAddItem = (e, values) => {
+    e.preventDefault();
+    console.log(e);
+    console.log(e.target);
+    console.log(values);
+  };
+
   // useEffect(() => {
   //   getWeather(coordinates, APIkey)
   //     .then((data) => {
@@ -122,7 +130,7 @@ function App() {
           {/* pass the variable to the main componenet as a prop*/}
           <Footer />
         </div>
-        <ModalWithForm
+        {/* <ModalWithForm
           title="New Garment"
           buttonText="Add Garment"
           // activeModal={activeModal}
@@ -188,12 +196,21 @@ function App() {
               Cold
             </label>
           </fieldset>
-        </ModalWithForm>
-        <ItemModal
-          activeModal={activeModal}
-          card={selectedCard}
-          handleCloseClick={closeActiveModal}
-        />
+        </ModalWithForm> */}
+        {activeModal === "add-garment" && (
+          <AddItemModal
+            closeActiveModal={closeActiveModal}
+            isOpen={activeModal === "add-garment"}
+            onAddItem={onAddItem}
+          />
+        )}
+        {activeModal === "preview" && (
+          <ItemModal
+            activeModal={activeModal}
+            card={selectedCard}
+            handleCloseClick={closeActiveModal}
+          />
+        )}
       </CurrentTemperatureUnitContext.Provider>
     </div>
   );

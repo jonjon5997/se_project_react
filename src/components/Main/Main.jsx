@@ -54,11 +54,11 @@ import ItemCard from "../ItemCard/ItemCard";
 
 function Main({ weatherTemp, weatherData, handleCardClick, clothingItems }) {
   const { currentTempUnit } = useContext(CurrentTemperatureUnitContext);
-  console.log(currentTempUnit);
 
   if (!weatherTemp || !weatherData) {
     return <p>Loading weather data...</p>; // Or a loading spinner
   }
+  console.log(currentTempUnit);
 
   const weatherType = useMemo(() => {
     const temp = currentTempUnit === "F" ? weatherTemp.F : weatherTemp.C;
