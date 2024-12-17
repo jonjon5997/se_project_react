@@ -6,7 +6,8 @@ import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import Footer from "../Footer/Footer";
-import AddItemModal from "../../AddItemModal/AddItemModal";
+import AddItemModal from "../AddItemModal/AddItemModal";
+import Profile from "../Profile/Profile";
 import {
   getWeather,
   filterWeatherData,
@@ -73,6 +74,17 @@ function App() {
     setClothingItems(defaultClothingItems);
   }, []);
 
+  // useEffect(() => {
+  //   // Simulating an API call
+  //   fetchWeatherData().then((data) => {
+  //     setTemp({
+  //       F: data?.temperatureFahrenheit || 0,
+  //       C: data?.temperatureCelsius || 0,
+  //     });
+  //     setWeatherData(data);
+  //   });
+  // }, []);
+
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit((prevUnit) => {
       const newUnit = prevUnit === "F" ? "C" : "F";
@@ -135,7 +147,7 @@ function App() {
                   />
                 }
               ></Route>
-              <Route path="/profile" element={<p>Profile</p>}></Route>
+              <Route path="/profile" element={<Profile />}></Route>
             </Routes>
 
             <Footer />
