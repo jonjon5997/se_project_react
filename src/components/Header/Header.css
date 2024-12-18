@@ -38,3 +38,8 @@
   /* gap: 16px; Optional: add some space between the elements */
   margin-left: auto;
 }
+
+.header__link {
+  text-decoration: none;
+  color: black;
+}
