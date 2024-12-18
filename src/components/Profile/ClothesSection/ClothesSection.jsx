@@ -3,19 +3,20 @@ import "./ClothesSection.css";
 import ItemCard from "../../ItemCard/ItemCard";
 import { defaultClothingItems } from "../../../utils/constants";
 
-function ClothesSection() {
+function ClothesSection({ onCardClick }) {
   return (
     <div className="clothes-section">
       <div>
         <p>Your items</p>
         <button>Add new +</button>
       </div>
-      <ul className="cards__list">
+      <ul className="clothes-section__items">
         {defaultClothingItems.map((item) => (
           <ItemCard
             key={item._id}
             item={item}
-            // TODO pass as prop // onCardClick={handleCardClick}
+            // TODO pass as prop
+            onCardClick={onCardClick}
           />
         ))}
       </ul>
