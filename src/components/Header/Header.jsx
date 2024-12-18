@@ -4,6 +4,7 @@ import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import "./Header.css";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 function Header({ handleAddClick, temp, weatherData }) {
   const { currentTempUnit, handleToggleSwitchChange } = useContext(
@@ -20,7 +21,9 @@ function Header({ handleAddClick, temp, weatherData }) {
 
   return (
     <header className="header">
-      <img className="header__logo" src={logo} alt="App Logo" />
+      <Link to="/">
+        <img className="header__logo" src={logo} alt="App Logo" />
+      </Link>
       <p className="header__date-and-location">
         {currentDate}, {weatherData.city}{" "}
       </p>
