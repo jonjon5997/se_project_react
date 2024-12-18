@@ -44,6 +44,9 @@ function App() {
 
   const [currentTempUnit, setCurrentTemperatureUnit] = useState("F");
 
+  const handleToggleSwitchChange = () => {
+    setCurrentTemperatureUnit((prevUnit) => (prevUnit === "F" ? "C" : "F"));
+  };
   console.log("Selected Card:", selectedCard);
 
   const handleCardClick = (card) => {
@@ -85,13 +88,13 @@ function App() {
   //   });
   // }, []);
 
-  const handleToggleSwitchChange = () => {
-    setCurrentTemperatureUnit((prevUnit) => {
-      const newUnit = prevUnit === "F" ? "C" : "F";
-      console.log("Temperature Unit Changed To:", newUnit);
-      return newUnit;
-    });
-  };
+  // const handleToggleSwitchChange = () => {
+  //   setCurrentTemperatureUnit((prevUnit) => {
+  //     const newUnit = prevUnit === "F" ? "C" : "F";
+  //     console.log("Temperature Unit Changed To:", newUnit);
+  //     return newUnit;
+  //   });
+  // };
 
   const onAddItem = (e, values) => {
     e.preventDefault();
@@ -134,6 +137,8 @@ function App() {
               handleAddClick={handleAddClick}
               weatherData={weatherData}
               temp={temp}
+              handleToggleSwitchChange={handleToggleSwitchChange}
+              currentTempUnit={currentTempUnit}
             />
             <Routes>
               <Route
