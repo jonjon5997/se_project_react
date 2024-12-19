@@ -8,6 +8,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import Profile from "../Profile/Profile";
+import ClothesSection from "../Profile/ClothesSection/ClothesSection";
 import {
   getWeather,
   filterWeatherData,
@@ -21,6 +22,7 @@ import {
 // import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { getItems, addItem, deleteItem } from "../../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState(
@@ -42,7 +44,35 @@ function App() {
   const [temp, setTemp] = useState(null);
   const [clothingItems, setClothingItems] = useState([]);
 
+  // useEffect(() => {
+  //   getItems()
+  //     .then((data) => setClothingItems(data))
+  //     .catch((err) => console.error("Error fetching items:", err));
+  // }, []);
+
   const [currentTempUnit, setCurrentTemperatureUnit] = useState("F");
+
+  useEffect(() => {
+    getWeather(coordinates, APIkey)
+      .then((data) => {
+        console.log("Weather API response:", data);
+        const filteredData = filterWeatherData(data);
+        const parsedData = parseWeatherData(data); // Updated variable name for clarity
+        setWeatherData(filteredData);
+        setTemp(parsedData.temperature); // Pass parsed temperature object
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        console.log(data);
+        setClothingItems(data);
+        //set the clothing items using the data that was returned
+      })
+      .catch(console.error);
+  }, []);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit((prevUnit) => (prevUnit === "F" ? "C" : "F"));
@@ -66,16 +96,16 @@ function App() {
     e.preventDefault();
     const newGarment = {
       name: e.target.name.value,
-      ImageUrl: e.target.ImageUrl.value,
+      imageUrl: e.target.imageUrl.value,
       weather: e.target.querySelector('input[type="radio"]:checked').id,
     };
     console.log("New Garment:", newGarment);
     closeActiveModal();
   };
 
-  useEffect(() => {
-    setClothingItems(defaultClothingItems);
-  }, []);
+  // useEffect(() => {
+  //   setClothingItems(defaultClothingItems);
+  // }, []);
 
   // useEffect(() => {
   //   // Simulating an API call
@@ -98,9 +128,18 @@ function App() {
 
   const onAddItem = (e, values) => {
     e.preventDefault();
-    console.log(e);
-    console.log(e.target);
-    console.log(values);
+    const newItem = {
+      name: values.name,
+      imageUrl: values.imageUrl,
+      weather: values.weather,
+    };
+
+    addItem(newItem)
+      .then((addedItem) => {
+        setClothingItems((prevItems) => [addedItem, ...prevItems]);
+        console.log("Item added successfully:", addedItem);
+      })
+      .catch((err) => console.error("Error adding item:", err));
   };
 
   // useEffect(() => {
@@ -114,17 +153,26 @@ function App() {
   //     })
   //     .catch(console.error);
   // }, []);
-  useEffect(() => {
-    getWeather(coordinates, APIkey)
-      .then((data) => {
-        console.log("Weather API response:", data);
-        const filteredData = filterWeatherData(data);
-        const parsedData = parseWeatherData(data); // Updated variable name for clarity
-        setWeatherData(filteredData);
-        setTemp(parsedData.temperature); // Pass parsed temperature object
+
+  const handleDeleteItem = (id) => {
+    deleteItem(id)
+      .then(() => {
+        setClothingItems((prevItems) =>
+          prevItems.filter((item) => item._id !== id)
+        );
+        console.log(`Item with ID ${id} deleted successfully.`);
       })
-      .catch(console.error);
-  }, []);
+      .catch((err) => console.error("Error deleting item:", err));
+  };
+
+  function addClothingItem(newItem) {
+    addItem(newItem)
+      .then((addedItem) => {
+        setClothingItems((prevItems) => [addedItem, ...prevItems]);
+        console.log("Item added successfully:", addedItem);
+      })
+      .catch((err) => console.error("Error adding item:", err));
+  }
 
   return (
     <BrowserRouter>
@@ -144,18 +192,28 @@ function App() {
               <Route
                 path="/"
                 element={
+                  //pass clothing items as a prop
                   <Main
                     weatherTemp={temp}
                     weatherData={weatherData}
-                    onCardClick={handleCardClick}
+                    onCardClick={() => {}}
                     clothingItems={clothingItems}
                   />
                 }
-              ></Route>
+              />
+              <Route
+                path="/add"
+                element={
+                  <ClothesSection
+                    onCardClick={handleCardClick}
+                    onAddClothingItem={addClothingItem}
+                  />
+                }
+              />
               <Route
                 path="/profile"
                 element={<Profile onCardClick={handleCardClick} />}
-              ></Route>
+              />
             </Routes>
 
             <Footer />
@@ -227,6 +285,17 @@ function App() {
             </label>
           </fieldset>
         </ModalWithForm> */}
+          <div>
+            {/* Render clothing items */}
+            {clothingItems.map((item) => (
+              <div key={item._id}>
+                <p>{item.name}</p>
+                <button onClick={() => handleDeleteItem(item._id)}>
+                  Delete
+                </button>
+              </div>
+            ))}
+          </div>
           {activeModal === "add-garment" && (
             <AddItemModal
               closeActiveModal={closeActiveModal}

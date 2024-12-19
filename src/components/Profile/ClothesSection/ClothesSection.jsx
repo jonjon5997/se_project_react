@@ -4,6 +4,15 @@ import ItemCard from "../../ItemCard/ItemCard";
 import { defaultClothingItems } from "../../../utils/constants";
 
 function ClothesSection({ onCardClick }) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newItem = { name, imageUrl, weather };
+    onAddClothingItem(newItem); // Call the handler passed via props
+    setName(""); // Reset the form
+    setImageUrl("");
+    setWeather("");
+  };
+
   return (
     <div className="clothes-section">
       <div>
