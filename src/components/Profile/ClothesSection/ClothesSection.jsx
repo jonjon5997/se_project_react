@@ -3,7 +3,7 @@ import "./ClothesSection.css";
 import ItemCard from "../../ItemCard/ItemCard";
 import { defaultClothingItems } from "../../../utils/constants";
 
-function ClothesSection({ onCardClick }) {
+function ClothesSection({ onCardClick, clothingItems }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newItem = { name, imageUrl, weather };
@@ -20,7 +20,7 @@ function ClothesSection({ onCardClick }) {
         <button>Add new +</button>
       </div>
       <ul className="clothes-section__items">
-        {defaultClothingItems.map((item) => (
+        {clothingItems.map((item) => (
           <ItemCard
             key={item._id}
             item={item}

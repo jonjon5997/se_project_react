@@ -13,15 +13,19 @@ export const getWeather = ({ latitude, longitude }, APIkey) => {
 export const filterWeatherData = (data) => {
   const result = {};
   // Extract and map values
+  const temperature = data.main.temp;
   result.city = data.name;
-  result.temp = { F: data.main.temp }; // Assuming temperature is already in Fahrenheit
-  result.type = getWeatherType(data.main.temp); // Pass temperature directly
+  (result.temp = {
+    F: `${Math.round(temperature)}`,
+    C: `${Math.round(((temperature - 32) * 5) / 9)}`,
+  }), // Assuming temperature is already in Fahrenheit
+    (result.type = getWeatherType(data.main.temp)); // Pass temperature directly
   result.condition = data.weather[0]?.main.toLowerCase(); // Ensure proper case and fallback
   result.isDay = isDay(data.sys, Date.now());
+  result.weatherType = getWeatherType(temperature);
 
   // Log the processed result for debugging
   console.log("Raw weather data:", data);
-  console.log("Filtered Weather Data:", result);
   return result;
 };
 
