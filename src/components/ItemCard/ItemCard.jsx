@@ -6,7 +6,7 @@ function ItemCard({ item, onCardClick }) {
     onCardClick(item);
   };
 
-  console.log(item);
+  console.log(item, onCardClick);
   return (
     <li className="card">
       <h2 className="card__name"> {item.name} </h2>

@@ -35,22 +35,51 @@ function App() {
   ); //left part of object is variable name and the second part is the function you can use to change the variable -> variableName, setVariableName
   // const [activeModal, setActiveModal] = useState("preview");
   const [activeModal, setActiveModal] = useState("");
-  const [selectedCard, setSelectedCard] = useState({
-    _id: "",
-    name: "Gloves",
-    link: "https://cdn.pixabay.com/photo/2024/11/26/12/50/ai-generated-9225728_1280.jpg",
-    weather: "cold",
-  });
+  const [selectedCard, setSelectedCard] = useState(
+    //   {
+    //   _id: "",
+    //   name: "Gloves",
+    //   link: "https://cdn.pixabay.com/photo/2024/11/26/12/50/ai-generated-9225728_1280.jpg",
+    //   weather: "cold",
+    // }
+    null
+  );
   const [temp, setTemp] = useState(null);
   const [clothingItems, setClothingItems] = useState([]);
 
-  // useEffect(() => {
-  //   getItems()
-  //     .then((data) => setClothingItems(data))
-  //     .catch((err) => console.error("Error fetching items:", err));
-  // }, []);
-
   const [currentTempUnit, setCurrentTemperatureUnit] = useState("F");
+
+  const [cards, setCards] = useState([
+    {
+      id: 1,
+      name: "Card 1",
+      link: "https://example.com/image1.jpg",
+      weather: "Hot",
+    },
+    {
+      id: 2,
+      name: "Card 2",
+      link: "https://example.com/image2.jpg",
+      weather: "Cold",
+    },
+    // more cards
+  ]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = (card) => {
+    setSelectedCard(card);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedCard(null);
+    setIsModalOpen(false);
+  };
+
+  const handleDeleteCard = (cardId) => {
+    setCards((prevCards) => prevCards.filter((card) => card.id !== cardId));
+    handleCloseModal(); // Close modal after deleting
+  };
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
@@ -80,6 +109,7 @@ function App() {
   console.log("Selected Card:", selectedCard);
 
   const handleCardClick = (card) => {
+    console.log("Card clicked:", card);
     setActiveModal("preview");
     setSelectedCard(card);
   };
@@ -103,29 +133,6 @@ function App() {
     closeActiveModal();
   };
 
-  // useEffect(() => {
-  //   setClothingItems(defaultClothingItems);
-  // }, []);
-
-  // useEffect(() => {
-  //   // Simulating an API call
-  //   fetchWeatherData().then((data) => {
-  //     setTemp({
-  //       F: data?.temperatureFahrenheit || 0,
-  //       C: data?.temperatureCelsius || 0,
-  //     });
-  //     setWeatherData(data);
-  //   });
-  // }, []);
-
-  // const handleToggleSwitchChange = () => {
-  //   setCurrentTemperatureUnit((prevUnit) => {
-  //     const newUnit = prevUnit === "F" ? "C" : "F";
-  //     console.log("Temperature Unit Changed To:", newUnit);
-  //     return newUnit;
-  //   });
-  // };
-
   const onAddItem = (e, values) => {
     e.preventDefault();
     const newItem = {
@@ -141,18 +148,6 @@ function App() {
       })
       .catch((err) => console.error("Error adding item:", err));
   };
-
-  // useEffect(() => {
-  //   getWeather(coordinates, APIkey)
-  //     .then((data) => {
-  //       console.log("Weather API response:", data);
-  //       const filteredData = filterWeatherData(data);
-  //       const temperature = parseWeatherData(data);
-  //       setWeatherData(filteredData);
-  //       setTemp(temperature);
-  //     })
-  //     .catch(console.error);
-  // }, []);
 
   const handleDeleteItem = (id) => {
     deleteItem(id)
@@ -173,6 +168,8 @@ function App() {
       })
       .catch((err) => console.error("Error adding item:", err));
   }
+
+  // console.log("Selected Card:", card);
 
   return (
     <BrowserRouter>
@@ -196,20 +193,20 @@ function App() {
                   <Main
                     weatherTemp={temp}
                     weatherData={weatherData}
-                    onCardClick={() => {}}
+                    onCardClick={handleCardClick}
                     clothingItems={clothingItems}
                   />
                 }
               />
-              <Route
+              {/* <Route
                 path="/add"
                 element={
                   <ClothesSection
                     onCardClick={handleCardClick}
                     onAddClothingItem={addClothingItem}
                   />
-                }
-              />
+                } */}
+              {/* /> */}
               <Route
                 path="/profile"
                 element={
@@ -301,6 +298,7 @@ function App() {
               </div>
             ))}
           </div>
+
           {activeModal === "add-garment" && (
             <AddItemModal
               closeActiveModal={closeActiveModal}
@@ -313,6 +311,7 @@ function App() {
               activeModal={activeModal}
               card={selectedCard}
               handleCloseClick={closeActiveModal}
+              onDeleteCard={handleDeleteItem} // Pass delete function to modal
             />
           )}
         </CurrentTemperatureUnitContext.Provider>

@@ -1,4 +1,9 @@
-/* .modal__content_type_image {
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url(../../assets/fonts/CabinetGrotesk.woff) format("woff");
+}
+
+.modal__content_type_image {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,4 +29,18 @@
 .modal__weather {
   font-size: 16px;
   color: gray;
-} */
+}
+
+/* ItemModal.css */
+.modal__delete-button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.modal__delete-button:hover {
+  background-color: darkred;
+}
