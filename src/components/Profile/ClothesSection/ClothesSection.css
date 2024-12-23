@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url(../../assets/fonts/CabinetGrotesk.woff) format("woff");
+}
+
+.clothes-section {
+  font-family: "Cabinet Grotesk";
+  font-family: Cabinet Grotesk;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24.8px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.clothes-section__button {
+  border: none;
+  cursor: pointer;
+}

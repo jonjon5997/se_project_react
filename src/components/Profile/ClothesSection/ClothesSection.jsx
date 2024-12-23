@@ -17,7 +17,9 @@ function ClothesSection({ onCardClick, clothingItems }) {
     <div className="clothes-section">
       <div>
         <p>Your items</p>
-        <button>Add new +</button>
+        <button className="clothes-section__button" onCardClick={onCardClick}>
+          Add new +
+        </button>
       </div>
       <ul className="clothes-section__items">
         {clothingItems.map((item) => (
