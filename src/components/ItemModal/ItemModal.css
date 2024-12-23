@@ -3,6 +3,12 @@
   src: url(../../assets/fonts/CabinetGrotesk.woff) format("woff");
 }
 
+.modal__footer {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
 .modal__content_type_image {
   display: flex;
   flex-direction: column;
