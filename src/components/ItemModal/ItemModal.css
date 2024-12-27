@@ -7,22 +7,25 @@
   position: relative;
   display: flex;
   justify-content: space-between;
+  margin-right: auto;
+  padding: 0 20px;
 }
 
 .modal__content_type_image {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 0px;
   background-color: white;
   border-radius: 10px;
   max-width: 400px;
+  border-radius: 16px;
 }
 
 .modal__image {
   width: 100%;
   height: auto;
-  border-radius: 5px;
+  border-radius: 16px;
   margin-bottom: 20px;
 }
 
@@ -30,21 +33,35 @@
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
+  position: absolute;
+  top: -10px;
 }
 
 .modal__weather {
   font-size: 16px;
-  color: gray;
+  color: black;
+  font-weight: bold;
+  padding-top: 16px;
 }
 
 /* ItemModal.css */
 .modal__delete-button {
-  background-color: red;
+  position: absolute;
+  /* background-color: red;
   color: white;
   border: none;
   padding: 10px;
   margin-top: 20px;
-  cursor: pointer;
+  cursor: pointer; */
+  color: #ff4d00;
+  border: none;
+  background-color: white;
+  width: 101px;
+  height: 24px;
+  top: 516px;
+  left: 383px;
+  gap: 0px;
+  opacity: 0px;
 }
 
 .modal__delete-button:hover {

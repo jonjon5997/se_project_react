@@ -24,7 +24,7 @@ const ItemModal = ({ activeModal, handleCloseClick, card, onDeleteCard }) => {
           alt={card.name || "Item Image"}
           className="modal__image"
         />
-        <div className="modal_footer">
+        <div className="modal__footer">
           <h2 className="modal__caption">{card.name}</h2>
           <p className="modal__weather">Weather: {card.weather}</p>
         </div>

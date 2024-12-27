@@ -65,8 +65,8 @@ function ClothesSection({
 
   return (
     <div className="clothes-section">
-      <div>
-        <p>Your items</p>
+      <div className="clothes-section__item-container">
+        <p className="clothes-section__title">Your items</p>
         <button className="clothes-section__button" onClick={handleAddClick}>
           Add new +
         </button>
@@ -76,7 +76,7 @@ function ClothesSection({
           <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
         ))}
       </ul>
-      <form onSubmit={handleSubmit}>
+      {/* <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Name"
@@ -95,7 +95,7 @@ function ClothesSection({
           <option value="Warm">Warm</option>
         </select>
         <button type="submit">Add Item</button>
-      </form>
+      </form> */}
     </div>
   );
 }

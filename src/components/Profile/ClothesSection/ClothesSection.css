@@ -15,10 +15,31 @@
 }
 
 .clothes-section__items {
-  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  gap: 21px;
+  color: #00000099;
 }
 
 .clothes-section__button {
   border: none;
   cursor: pointer;
+  padding: 16px 20px;
+  background-color: transparent;
+  opacity: 0.6;
+}
+
+.clothes-section__button:hover {
+  opacity: 1;
+}
+
+.clothes-section__item-container {
+  display: flex;
+}
+
+.clothes-section__title {
+  font-weight: 700;
 }

@@ -5,6 +5,7 @@
 
 .sidebar__user {
   display: flex;
+  margin: 0 116px 0 0;
 }
 
 .sidebar__avatar {
