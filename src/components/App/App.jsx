@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -23,7 +22,6 @@ import {
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { getItems, addItem, deleteItem } from "../../utils/api";
-
 function App() {
   const [weatherData, setWeatherData] = useState(
     //   {
@@ -46,9 +44,7 @@ function App() {
   );
   const [temp, setTemp] = useState(null);
   const [clothingItems, setClothingItems] = useState([]);
-
   const [currentTempUnit, setCurrentTemperatureUnit] = useState("F");
-
   const [cards, setCards] = useState([
     {
       id: 1,
@@ -65,22 +61,18 @@ function App() {
     // more cards
   ]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const handleOpenModal = (card) => {
     setSelectedCard(card);
     setIsModalOpen(true);
   };
-
   const handleCloseModal = () => {
     setSelectedCard(null);
     setIsModalOpen(false);
   };
-
   const handleDeleteCard = (cardId) => {
     setCards((prevCards) => prevCards.filter((card) => card.id !== cardId));
     handleCloseModal(); // Close modal after deleting
   };
-
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -92,7 +84,6 @@ function App() {
       })
       .catch(console.error);
   }, []);
-
   useEffect(() => {
     getItems()
       .then((data) => {
@@ -102,26 +93,21 @@ function App() {
       })
       .catch(console.error);
   }, []);
-
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit((prevUnit) => (prevUnit === "F" ? "C" : "F"));
   };
   console.log("Selected Card:", selectedCard);
-
   const handleCardClick = (card) => {
     console.log("Card clicked:", card);
     setActiveModal("preview");
     setSelectedCard(card);
   };
-
   const handleAddClick = () => {
     setActiveModal("add-garment");
   };
-
   const closeActiveModal = () => {
     setActiveModal("");
   };
-
   const handleAddGarmentSubmit = (e) => {
     e.preventDefault();
     const newGarment = {
@@ -132,7 +118,6 @@ function App() {
     console.log("New Garment:", newGarment);
     closeActiveModal();
   };
-
   const onAddItem = (e, values) => {
     e.preventDefault();
     const newItem = {
@@ -140,7 +125,6 @@ function App() {
       imageUrl: values.imageUrl,
       weather: values.weather,
     };
-
     addItem(newItem)
       .then((addedItem) => {
         setClothingItems((prevItems) => [addedItem, ...prevItems]);
@@ -148,7 +132,6 @@ function App() {
       })
       .catch((err) => console.error("Error adding item:", err));
   };
-
   const handleDeleteItem = (id) => {
     deleteItem(id)
       .then(() => {
@@ -159,7 +142,6 @@ function App() {
       })
       .catch((err) => console.error("Error deleting item:", err));
   };
-
   function addClothingItem(newItem) {
     addItem(newItem)
       .then((addedItem) => {
@@ -168,9 +150,7 @@ function App() {
       })
       .catch((err) => console.error("Error adding item:", err));
   }
-
   // console.log("Selected Card:", card);
-
   return (
     <BrowserRouter>
       <div className="page">
@@ -205,8 +185,8 @@ function App() {
                     onCardClick={handleCardClick}
                     onAddClothingItem={addClothingItem}
                   />
-                } */}
-              {/* /> */}
+                }
+              /> */}
               <Route
                 path="/profile"
                 element={
@@ -217,7 +197,6 @@ function App() {
                 }
               />
             </Routes>
-
             <Footer />
           </div>
           {/* <ModalWithForm
@@ -298,7 +277,6 @@ function App() {
               </div>
             ))}
           </div>
-
           {activeModal === "add-garment" && (
             <AddItemModal
               closeActiveModal={closeActiveModal}
@@ -319,5 +297,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
 export default App;

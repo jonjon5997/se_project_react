@@ -14,6 +14,7 @@ function Profile({ onCardClick, clothingItems }) {
           <ClothesSection
             onCardClick={onCardClick}
             clothingItems={clothingItems}
+            // onSubmit={onSubmit}
           />
         </section>
       </div>
