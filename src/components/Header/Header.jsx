@@ -25,12 +25,9 @@ function Header({ handleAddClick, temp, weatherData }) {
         <img className="header__logo" src={logo} alt="App Logo" />
       </Link>
       <p className="header__date-and-location">
-        {currentDate}, {weatherData.city}{" "}
+        {currentDate}, {weatherData.city} {temp[currentTempUnit]}°{" "}
+        {currentTempUnit}
       </p>
-      {/* <div className="header__city">{weatherData.city}</div> */}
-      <div className="header__temp">
-        {temp[currentTempUnit]}°{currentTempUnit}
-      </div>
       <div className="header__profile-container">
         <ToggleSwitch />
         <button

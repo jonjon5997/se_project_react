@@ -7,7 +7,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import Profile from "../Profile/Profile";
-import ClothesSection from "../Profile/ClothesSection/ClothesSection";
+// import ClothesSection from "../Profile/ClothesSection/ClothesSection";
 import {
   getWeather,
   filterWeatherData,
@@ -45,34 +45,7 @@ function App() {
   const [temp, setTemp] = useState(null);
   const [clothingItems, setClothingItems] = useState([]);
   const [currentTempUnit, setCurrentTemperatureUnit] = useState("F");
-  const [cards, setCards] = useState([
-    {
-      id: 1,
-      name: "Card 1",
-      link: "https://example.com/image1.jpg",
-      weather: "Hot",
-    },
-    {
-      id: 2,
-      name: "Card 2",
-      link: "https://example.com/image2.jpg",
-      weather: "Cold",
-    },
-    // more cards
-  ]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleOpenModal = (card) => {
-    setSelectedCard(card);
-    setIsModalOpen(true);
-  };
-  const handleCloseModal = () => {
-    setSelectedCard(null);
-    setIsModalOpen(false);
-  };
-  const handleDeleteCard = (cardId) => {
-    setCards((prevCards) => prevCards.filter((card) => card.id !== cardId));
-    handleCloseModal(); // Close modal after deleting
-  };
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -108,16 +81,7 @@ function App() {
   const closeActiveModal = () => {
     setActiveModal("");
   };
-  const handleAddGarmentSubmit = (e) => {
-    e.preventDefault();
-    const newGarment = {
-      name: e.target.name.value,
-      imageUrl: e.target.imageUrl.value,
-      weather: e.target.querySelector('input[type="radio"]:checked').id,
-    };
-    console.log("New Garment:", newGarment);
-    closeActiveModal();
-  };
+
   const onAddItem = (e, values) => {
     e.preventDefault();
     const newItem = {
@@ -142,15 +106,6 @@ function App() {
       })
       .catch((err) => console.error("Error deleting item:", err));
   };
-  function addClothingItem(newItem) {
-    addItem(newItem)
-      .then((addedItem) => {
-        setClothingItems((prevItems) => [addedItem, ...prevItems]);
-        console.log("Item added successfully:", addedItem);
-      })
-      .catch((err) => console.error("Error adding item:", err));
-  }
-  // console.log("Selected Card:", card);
   return (
     <BrowserRouter>
       <div className="page">
@@ -178,15 +133,6 @@ function App() {
                   />
                 }
               />
-              {/* <Route
-                path="/add"
-                element={
-                  <ClothesSection
-                    onCardClick={handleAddClick}
-                    onAddClothingItem={addClothingItem}
-                  />
-                }
-              /> */}
               <Route
                 path="/profile"
                 element={
@@ -200,84 +146,7 @@ function App() {
             </Routes>
             <Footer />
           </div>
-          {/* <ModalWithForm
-          title="New Garment"
-          buttonText="Add Garment"
-          // activeModal={activeModal}
-          isOpen={activeModal === "add-garment"} // Neutral isOpen logic here
-          handleCloseClick={closeActiveModal}
-          handleSubmit={handleAddGarmentSubmit}
-          clothingItems={clothingItems}
-        >
-          <label htmlFor="name" className="modal__label">
-            Name{" "}
-            <input
-              placeholder="name"
-              type="text"
-              className="modal__input"
-              id="name"
-            />
-          </label>
-          <label htmlFor="imageUrl" className="modal__label">
-            Image{" "}
-            <input
-              placeholder="imageUrl"
-              type="url"
-              className="modal__input"
-              id="imageUrl"
-            />
-          </label>
-          <fieldset className="modal__radio-buttons">
-            <legend className="modal__legend">Select the weather type:</legend>
-            <label
-              htmlFor="hot"
-              className="modal__label modal__label_type_radio"
-            >
-              <input
-                id="hot"
-                type="radio"
-                name="weatherType"
-                className="modal__radio-input"
-              />{" "}
-              Hot
-            </label>
-            <label
-              htmlFor="warm"
-              className="modal__label modal__label_type_radio"
-            >
-              <input
-                id="warm"
-                type="radio"
-                name="weatherType"
-                className="modal__radio-input"
-              />{" "}
-              Warm
-            </label>
-            <label
-              htmlFor="cold"
-              className="modal__label modal__label_type_radio"
-            >
-              <input
-                id="cold"
-                type="radio"
-                name="weatherType"
-                className="modal__radio-input"
-              />{" "}
-              Cold
-            </label>
-          </fieldset>
-        </ModalWithForm> */}
-          {/* <div>
-            
-            {clothingItems.map((item) => (
-              <div key={item._id}>
-                <p>{item.name}</p>
-                <button onClick={() => handleDeleteItem(item._id)}>
-                  Delete
-                </button>
-              </div>
-            ))}
-          </div> */}
+
           {activeModal === "add-garment" && (
             <AddItemModal
               closeActiveModal={closeActiveModal}
