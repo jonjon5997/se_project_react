@@ -14,6 +14,10 @@
   text-decoration-skip-ink: none;
 }
 
+.clothes-section__items {
+  margin: 20px;
+}
+
 .clothes-section__button {
   border: none;
   cursor: pointer;

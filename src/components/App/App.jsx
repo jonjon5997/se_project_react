@@ -182,7 +182,7 @@ function App() {
                 path="/add"
                 element={
                   <ClothesSection
-                    onCardClick={handleCardClick}
+                    onCardClick={handleAddClick}
                     onAddClothingItem={addClothingItem}
                   />
                 }
@@ -192,6 +192,7 @@ function App() {
                 element={
                   <Profile
                     onCardClick={handleCardClick}
+                    handleAddClick={handleAddClick}
                     clothingItems={clothingItems}
                   />
                 }
@@ -266,8 +267,8 @@ function App() {
             </label>
           </fieldset>
         </ModalWithForm> */}
-          <div>
-            {/* Render clothing items */}
+          {/* <div>
+            
             {clothingItems.map((item) => (
               <div key={item._id}>
                 <p>{item.name}</p>
@@ -276,7 +277,7 @@ function App() {
                 </button>
               </div>
             ))}
-          </div>
+          </div> */}
           {activeModal === "add-garment" && (
             <AddItemModal
               closeActiveModal={closeActiveModal}

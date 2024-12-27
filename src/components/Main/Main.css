@@ -6,6 +6,7 @@
   text-align: left;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
+  margin: 20px;
 }
 
 .cards__list {

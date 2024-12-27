@@ -39,7 +39,12 @@ import React, { useState } from "react";
 import "./ClothesSection.css";
 import ItemCard from "../../ItemCard/ItemCard";
 
-function ClothesSection({ onCardClick, clothingItems, onAddClothingItem }) {
+function ClothesSection({
+  onCardClick,
+  clothingItems,
+  onAddClothingItem,
+  handleAddClick,
+}) {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [weather, setWeather] = useState("");
@@ -62,7 +67,7 @@ function ClothesSection({ onCardClick, clothingItems, onAddClothingItem }) {
     <div className="clothes-section">
       <div>
         <p>Your items</p>
-        <button className="clothes-section__button" onClick={onCardClick}>
+        <button className="clothes-section__button" onClick={handleAddClick}>
           Add new +
         </button>
       </div>
