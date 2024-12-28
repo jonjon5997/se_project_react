@@ -40,18 +40,16 @@
 }
 
 .modal__delete-button {
-  position: absolute;
   color: #ff4d00;
   border: none;
-  background-color: white;
-  width: 101px;
-  height: 24px;
-  top: 516px;
-  left: 383px;
+  background-color: transparent;
   gap: 0px;
-  opacity: 0px;
+  display: flex;
+  margin-left: auto;
+  padding: 0 0 0 282px;
 }
 
 .modal__delete-button:hover {
-  background-color: darkred;
+  color: darkred;
+  cursor: pointer;
 }

@@ -27,12 +27,11 @@ const ItemModal = ({ activeModal, handleCloseClick, card, onDeleteCard }) => {
         <div className="modal__footer">
           <h2 className="modal__caption">{card.name}</h2>
           <p className="modal__weather">Weather: {card.weather}</p>
+          {/* Delete Button */}
+          <button className="modal__delete-button" onClick={handleDeleteClick}>
+            Delete Item
+          </button>
         </div>
-
-        {/* Delete Button */}
-        <button className="modal__delete-button" onClick={handleDeleteClick}>
-          Delete Item
-        </button>
       </div>
     </div>
   );

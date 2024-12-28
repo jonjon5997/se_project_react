@@ -8,24 +8,6 @@ function ClothesSection({
   onAddClothingItem,
   handleAddClick,
 }) {
-  const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [weather, setWeather] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newItem = {
-      _id: Date.now().toString(),
-      name,
-      imageUrl,
-      weather,
-    };
-    onAddClothingItem(newItem);
-    setName("");
-    setImageUrl("");
-    setWeather("");
-  };
-
   return (
     <div className="clothes-section">
       <div className="clothes-section__item-container">

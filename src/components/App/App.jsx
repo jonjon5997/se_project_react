@@ -7,7 +7,6 @@ import ItemModal from "../ItemModal/ItemModal";
 import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import Profile from "../Profile/Profile";
-// import ClothesSection from "../Profile/ClothesSection/ClothesSection";
 import {
   getWeather,
   filterWeatherData,
@@ -92,6 +91,7 @@ function App() {
     addItem(newItem)
       .then((addedItem) => {
         setClothingItems((prevItems) => [addedItem, ...prevItems]);
+        closeActiveModal();
         console.log("Item added successfully:", addedItem);
       })
       .catch((err) => console.error("Error adding item:", err));
@@ -110,7 +110,10 @@ function App() {
     <BrowserRouter>
       <div className="page">
         <CurrentTemperatureUnitContext.Provider
-          value={{ currentTempUnit, handleToggleSwitchChange }}
+          value={{
+            currentTempUnit,
+            handleToggleSwitchChange,
+          }}
         >
           <div className="page__content">
             <Header
@@ -118,7 +121,7 @@ function App() {
               weatherData={weatherData}
               temp={temp}
               handleToggleSwitchChange={handleToggleSwitchChange}
-              currentTempUnit={currentTempUnit}
+              // currentTempUnit={currentTempUnit}
             />
             <Routes>
               <Route
