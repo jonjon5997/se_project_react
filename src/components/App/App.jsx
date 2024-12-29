@@ -20,7 +20,7 @@ import {
 // import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { getItems, addItem, deleteItem } from "../../utils/api";
+import { getItems, addItem, deleteItem, checkResponse } from "../../utils/api";
 function App() {
   const [weatherData, setWeatherData] = useState(
     //   {
