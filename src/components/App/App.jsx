@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
@@ -12,71 +11,72 @@ import {
   filterWeatherData,
   parseWeatherData,
 } from "../../utils/weatherApi";
-import {
-  coordinates,
-  APIkey,
-  defaultClothingItems,
-} from "../../utils/constants";
-// import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
+import { coordinates, APIkey } from "../../utils/constants";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { getItems, addItem, deleteItem, checkResponse } from "../../utils/api";
+import { getItems, addItem, deleteItem } from "../../utils/api";
+
 function App() {
-  const [weatherData, setWeatherData] = useState(
-    //   {
-    //   type: "",
-    //   temp: { F: 999 },
-    //   city: "",
-    // }
-    null
-  ); //left part of object is variable name and the second part is the function you can use to change the variable -> variableName, setVariableName
-  // const [activeModal, setActiveModal] = useState("preview");
+  const [weatherData, setWeatherData] = useState(null);
   const [activeModal, setActiveModal] = useState("");
-  const [selectedCard, setSelectedCard] = useState(
-    //   {
-    //   _id: "",
-    //   name: "Gloves",
-    //   link: "https://cdn.pixabay.com/photo/2024/11/26/12/50/ai-generated-9225728_1280.jpg",
-    //   weather: "cold",
-    // }
-    null
-  );
+  const [selectedCard, setSelectedCard] = useState(null);
   const [temp, setTemp] = useState(null);
   const [clothingItems, setClothingItems] = useState([]);
   const [currentTempUnit, setCurrentTemperatureUnit] = useState("F");
 
+  // Fetch weather data
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
         console.log("Weather API response:", data);
         const filteredData = filterWeatherData(data);
-        const parsedData = parseWeatherData(data); // Updated variable name for clarity
+        const parsedData = parseWeatherData(data);
         setWeatherData(filteredData);
-        setTemp(parsedData.temperature); // Pass parsed temperature object
+        setTemp(parsedData.temperature);
       })
       .catch(console.error);
   }, []);
+
+  // Fetch clothing items
   useEffect(() => {
     getItems()
       .then((data) => {
         console.log(data);
         setClothingItems(data);
-        //set the clothing items using the data that was returned
       })
       .catch(console.error);
   }, []);
+
+  // Escape key listener for closing modals
+  useEffect(() => {
+    if (!activeModal) return; // Do nothing if no modal is active
+
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscClose);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]); // Only re-run if activeModal changes
+
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit((prevUnit) => (prevUnit === "F" ? "C" : "F"));
   };
-  console.log("Selected Card:", selectedCard);
+
   const handleCardClick = (card) => {
-    console.log("Card clicked:", card);
     setActiveModal("preview");
     setSelectedCard(card);
   };
+
   const handleAddClick = () => {
     setActiveModal("add-garment");
   };
+
   const closeActiveModal = () => {
     setActiveModal("");
   };
@@ -96,6 +96,7 @@ function App() {
       })
       .catch((err) => console.error("Error adding item:", err));
   };
+
   const handleDeleteItem = (id) => {
     deleteItem(id)
       .then(() => {
@@ -106,6 +107,7 @@ function App() {
       })
       .catch((err) => console.error("Error deleting item:", err));
   };
+
   return (
     <BrowserRouter>
       <div className="page">
@@ -121,13 +123,11 @@ function App() {
               weatherData={weatherData}
               temp={temp}
               handleToggleSwitchChange={handleToggleSwitchChange}
-              // currentTempUnit={currentTempUnit}
             />
             <Routes>
               <Route
                 path="/"
                 element={
-                  //pass clothing items as a prop
                   <Main
                     weatherTemp={temp}
                     weatherData={weatherData}
@@ -162,7 +162,7 @@ function App() {
               activeModal={activeModal}
               card={selectedCard}
               handleCloseClick={closeActiveModal}
-              onDeleteCard={handleDeleteItem} // Pass delete function to modal
+              onDeleteCard={handleDeleteItem}
             />
           )}
         </CurrentTemperatureUnitContext.Provider>
@@ -170,4 +170,5 @@ function App() {
     </BrowserRouter>
   );
 }
+
 export default App;
