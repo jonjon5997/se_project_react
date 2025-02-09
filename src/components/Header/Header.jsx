@@ -65,34 +65,52 @@ function Header({ handleAddClick, temp, weatherData }) {
             >
               + Add Clothes
             </button>
-            <Link to="/profile" className="header__link">
-              <div className="header__user-container">
-                <p className="header__username">{currentUser?.name}</p>
-                {currentUser?.avatar ? (
-                  <img
-                    src={currentUser.avatar}
-                    alt={currentUser.name}
-                    className="header__avatar"
-                  />
-                ) : (
-                  <div className="header__avatar header__avatar--placeholder">
-                    {getInitials(currentUser?.name)}
-                  </div>
-                )}
-              </div>
-            </Link>
+            <div className="header__user-container">
+              <p className="header__username">{currentUser?.name}</p>
+              {currentUser?.avatar ? (
+                <img
+                  src={currentUser.avatar}
+                  alt={currentUser.name}
+                  className="header__avatar"
+                />
+              ) : (
+                <div className="header__avatar header__avatar--placeholder">
+                  {getInitials(currentUser?.name)}
+                </div>
+              )}
+            </div>
           </>
         ) : (
           <div className="header__auth">
-            <Link to="/signup" className="header__link header__link-signup">
-              Sign Up
-            </Link>
-            <Link to="/signin" className="header__link header__link-login">
+            <button
+              onClick={openLoginModal}
+              className="header__link header__link-login"
+            >
               Log In
-            </Link>
+            </button>
+            <button
+              onClick={openRegisterModal}
+              className="header__link header__link-signup"
+            >
+              Sign Up
+            </button>
           </div>
         )}
       </div>
+      {isLoginModalOpen && (
+        <LoginModal
+          closeModal={closeModals}
+          handleLogin={setLoginModalOpen}
+          isOpen={isLoginModalOpen}
+        />
+      )}
+      {isRegisterModalOpen && (
+        <RegisterModal
+          closeModal={closeModals}
+          handleRegistration={setRegisterModalOpen}
+          isOpen={isRegisterModalOpen}
+        />
+      )}
     </header>
   );
 }

@@ -289,12 +289,13 @@ function App() {
       .then((data) => {
         if (data.jwt) {
           setToken(data.jwt);
-          return getUserData(); // Fetch user data after registration
+          return getUserData(data.token); // Fetch user data after registration
         }
       })
       .then((userData) => {
         setCurrentUser(userData);
         setIsLoggedIn(true);
+        closeActiveModal(); // Close the modal window
       })
       .catch((error) => {
         console.error("Error registering user:", error);
@@ -304,19 +305,40 @@ function App() {
   const handleLogin = ({ email, password }) => {
     authorize(email, password)
       .then((data) => {
-        if (data.jwt) {
-          setToken(data.jwt);
-          return getUserData(); // Fetch user data after login
+        if (data.token) {
+          // Ensure the API returns `token`
+          localStorage.setItem("jwt", data.token); // Store token
+          return getUserData(data.token); // Fetch user data
+        } else {
+          throw new Error("No token received from server");
         }
       })
       .then((userData) => {
         setCurrentUser(userData);
         setIsLoggedIn(true);
+        closeActiveModal(); // Close the modal window
       })
       .catch((error) => {
-        console.error("Error logging in user:", error);
+        console.error("Error logging in:", error);
       });
   };
+
+  // const handleLogin = ({ email, password }) => {
+  //   authorize(email, password)
+  //     .then((data) => {
+  //       if (data.token) {
+  //         setToken(data.token);
+  //         return getUserData(data.token); // Fetch user data after login
+  //       }
+  //     })
+  //     .then((userData) => {
+  //       setCurrentUser(userData);
+  //       setIsLoggedIn(true);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error logging in user:", error);
+  //     });
+  // };
 
   //   register({ name, avatar, email, password })
   //     .then((data) => {
@@ -334,7 +356,7 @@ function App() {
     const jwt = getToken();
     if (!jwt) return;
 
-    getUserData()
+    getUserData(jwt)
       .then((data) => {
         setCurrentUser(data);
         setIsLoggedIn(true);
