@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { updateUserProfile } from "../../utils/api";
 
 function EditProfileModal({ isOpen, onClose, currentUser, onUpdateUser }) {
   const [name, setName] = useState("");
@@ -15,7 +16,19 @@ function EditProfileModal({ isOpen, onClose, currentUser, onUpdateUser }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdateUser({ name, avatar }); // Send updated data to the API
+    setIsLoading(true);
+
+    updateUserProfile({ name, avatar })
+      .then((updatedUser) => {
+        onUpdateUser(updatedUser); // Update state in parent component
+        onClose(); // Close modal
+      })
+      .catch((err) => {
+        console.error("Failed to update profile:", err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (

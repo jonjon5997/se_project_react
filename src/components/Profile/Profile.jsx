@@ -20,12 +20,17 @@ function Profile({
   const handleCloseEditProfile = () => {
     setIsEditProfileOpen(false);
   };
+
+  const handleUpdateUser = (updatedUser) => {
+    setCurrentUser(updatedUser); // Update the user in state
+  };
+
   return (
     <div className="profile">
       <section className="profile__sidebar">
         <SideBar
           currentUser={currentUser}
-          onEditProfile={handleEditProfileClick}
+          onEditProfile={() => setIsEditProfileOpen(true)}
         />
       </section>
       <section className="profile__clothing-items">
@@ -39,9 +44,9 @@ function Profile({
       {isEditProfileOpen && (
         <EditProfileModal
           isOpen={isEditProfileOpen}
-          onClose={handleCloseEditProfile}
+          onClose={() => setIsEditProfileOpen(false)}
           currentUser={currentUser}
-          onUpdateUser={onUpdateUser}
+          onUpdateUser={handleUpdateUser}
         />
       )}
     </div>

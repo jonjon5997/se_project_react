@@ -38,4 +38,22 @@ function deleteItem(id) {
   });
 }
 
-export { getItems, addItem, deleteItem, checkResponse };
+
+function updateUserProfile (userData) {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`, // Adjust based on your auth system
+    },
+    body: JSON.stringify(userData),
+  }).then((res) => {
+    if (!res.ok) {
+      return Promise.reject(`Error: ${res.status}`);
+    }
+    return res.json();
+  });
+};
+
+
+export { getItems, addItem, deleteItem, checkResponse, updateUserProfile };
