@@ -11,32 +11,37 @@ function LoginModal({ handleLogin, closeModal, isOpen }) {
   };
 
   return (
-    <ModalWithForm
-      title="Login"
-      buttonText="Login"
-      isOpen={isOpen}
-      handleCloseClick={closeModal} // Ensure close works
-      onSubmit={handleSubmit} // Submit handler
-    >
-      <label>
-        Email:
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Password:
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
-    </ModalWithForm>
+    <div className="modal">
+      <ModalWithForm
+        title="Login"
+        buttonText="Login"
+        isOpen={isOpen}
+        handleCloseClick={closeModal} // Ensure close works
+        onSubmit={handleSubmit} // Submit handler
+        className="modal__content"
+      >
+        <label className="modal__form">
+          Email:
+          <input
+            className="modal__input"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </label>
+        <label className="modal__form">
+          Password:
+          <input
+            className="modal__input"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </label>
+      </ModalWithForm>
+    </div>
   );
 }
 
