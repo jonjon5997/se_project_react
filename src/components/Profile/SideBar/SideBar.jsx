@@ -1,14 +1,20 @@
 import React from "react";
 import "./SideBar.css";
-import avatar from "../../../assets/avatar.svg";
 
-function SideBar() {
+function SideBar({ currentUser, onEditProfile }) {
   return (
     <div className="sidebar">
       <div className="sidebar__user">
-        <img className="sidebar__avatar" src={avatar} alt="default avatar" />
-        <p className="sidebar__username">UserName</p>
+        <img
+          className="sidebar__avatar"
+          src={currentUser?.avatar || "/path-to-default-avatar.svg"}
+          alt="User Avatar"
+        />
+        <p className="sidebar__username">{currentUser?.name || "User Name"}</p>
       </div>
+      <button className="sidebar__edit-button" onClick={onEditProfile}>
+        Edit Profile
+      </button>
     </div>
   );
 }
