@@ -9,13 +9,19 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 
-function Header({ handleAddClick, temp, weatherData }) {
+function Header({
+  handleAddClick,
+  temp,
+  weatherData,
+  openLoginModal,
+  openRegisterModal,
+}) {
   const { currentTempUnit, handleToggleSwitchChange } = useContext(
     CurrentTemperatureUnitContext
   );
   const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
-  const [isLoginModalOpen, setLoginModalOpen] = useState(false); // Modal state for Login
-  const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
+  // const [isLoginModalOpen, setLoginModalOpen] = useState(false); // Modal state for Login
+  // const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
 
   if (!weatherData || !temp) {
     return null; // Or render a loading indicator
@@ -28,21 +34,21 @@ function Header({ handleAddClick, temp, weatherData }) {
   // Generate a placeholder avatar (first letter of the user's name)
   const getInitials = (name) => (name ? name.charAt(0).toUpperCase() : "?");
 
-  // Function to handle opening Login modal
-  const openLoginModal = () => {
-    setLoginModalOpen(true);
-  };
+  // // Function to handle opening Login modal
+  // const openLoginModal = () => {
+  //   setLoginModalOpen(true);
+  // };
 
-  // Function to handle opening Register modal
-  const openRegisterModal = () => {
-    setRegisterModalOpen(true);
-  };
+  // // Function to handle opening Register modal
+  // const openRegisterModal = () => {
+  //   setRegisterModalOpen(true);
+  // };
 
-  // Function to handle closing all modals
-  const closeModals = () => {
-    setLoginModalOpen(false);
-    setRegisterModalOpen(false);
-  };
+  // // Function to handle closing all modals
+  // const closeModals = () => {
+  //   setLoginModalOpen(false);
+  //   setRegisterModalOpen(false);
+  // };
 
   return (
     <header className="header">
@@ -97,7 +103,7 @@ function Header({ handleAddClick, temp, weatherData }) {
           </div>
         )}
       </div>
-      {isLoginModalOpen && (
+      {/* {isLoginModalOpen && (
         <LoginModal
           closeModal={closeModals}
           handleLogin={setLoginModalOpen}
@@ -110,7 +116,7 @@ function Header({ handleAddClick, temp, weatherData }) {
           handleRegistration={setRegisterModalOpen}
           isOpen={isRegisterModalOpen}
         />
-      )}
+      )} */}
     </header>
   );
 }
