@@ -15,6 +15,7 @@ function Header({
   weatherData,
   openLoginModal,
   openRegisterModal,
+  handleSignOut,
 }) {
   const { currentTempUnit, handleToggleSwitchChange } = useContext(
     CurrentTemperatureUnitContext
@@ -84,6 +85,12 @@ function Header({
                   {getInitials(currentUser?.name)}
                 </div>
               )}
+              <button
+                className="header__signout-button"
+                onClick={handleSignOut}
+              >
+                Sign Out
+              </button>
             </div>
           </>
         ) : (

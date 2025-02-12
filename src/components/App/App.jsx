@@ -266,6 +266,12 @@ function App() {
       });
   };
 
+  const handleSignOut = () => {
+    localStorage.removeItem("jwt"); // Remove token
+    setIsLoggedIn(false); // Update login state
+    setCurrentUser(null); // Clear user data
+  };
+
   return (
     <BrowserRouter>
       <CurrentUserContext.Provider value={{ currentUser, isLoggedIn }}>
@@ -284,6 +290,7 @@ function App() {
                 handleToggleSwitchChange={handleToggleSwitchChange}
                 openLoginModal={openLoginModal}
                 openRegisterModal={openRegisterModal}
+                handleSignOut={handleSignOut}
 
                 // onClick={openLoginModal && openRegisterModal}
               />
@@ -403,6 +410,7 @@ function App() {
                 card={selectedCard}
                 handleCloseClick={closeActiveModal}
                 onDeleteCard={handleDeleteItem}
+                handleCardLike={handleCardLike}
               />
             )}
           </CurrentTemperatureUnitContext.Provider>
