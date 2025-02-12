@@ -30,12 +30,6 @@ export const defaultWeatherOptions = {
   },
 };
 
-// console.log("Weather Options:", weatherOptions);
-
-// const testUrl = new URL("../assets/day/clear.png", import.meta.url).href;
-// console.log("Test Resolved URL:", testUrl);
-// console.log(import.meta.url);
-
 export const defaultClothingItems = [
   {
     _id: 0,
