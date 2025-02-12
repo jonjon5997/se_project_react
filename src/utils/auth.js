@@ -7,6 +7,7 @@ function register({ name, avatar, email, password }) {
   return fetch(`${API_URL}/signup`, {
     method: "POST",
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ name, avatar, email, password }),
@@ -18,6 +19,7 @@ function authorize({ email, password }) {
   return fetch(`${API_URL}/signin`, {
     method: "POST",
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),

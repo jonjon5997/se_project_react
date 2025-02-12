@@ -5,7 +5,13 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 // import { defaultClothingItems } from "../../utils/constants";
 import ItemCard from "../ItemCard/ItemCard";
 
-function Main({ weatherTemp, weatherData, onCardClick, clothingItems }) {
+function Main({
+  weatherTemp,
+  weatherData,
+  onCardClick,
+  clothingItems,
+  handleCardLike,
+}) {
   const { currentTempUnit } = useContext(CurrentTemperatureUnitContext);
 
   if (!weatherTemp || !weatherData) {

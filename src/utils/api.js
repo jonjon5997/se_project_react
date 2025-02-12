@@ -38,13 +38,12 @@ function deleteItem(id) {
   });
 }
 
-
-function updateUserProfile (userData) {
+function updateUserProfile(userData) {
   return fetch(`${BASE_URL}/users/me`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`, // Adjust based on your auth system
+      Authorization: `Bearer ${localStorage.getItems("token")}`, // Adjust based on your auth system
     },
     body: JSON.stringify(userData),
   }).then((res) => {
@@ -53,7 +52,6 @@ function updateUserProfile (userData) {
     }
     return res.json();
   });
-};
-
+}
 
 export { getItems, addItem, deleteItem, checkResponse, updateUserProfile };

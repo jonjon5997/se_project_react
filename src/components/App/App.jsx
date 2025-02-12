@@ -58,18 +58,12 @@ function App() {
       });
   };
 
-  const handleRegistration = ({ email, password }) => {
-    register(email, password)
-      .then((data) => {
-        if (data.jwt) {
-          setToken(data.jwt);
-          return getUserData(data.token); // Fetch user data after registration
-        }
-      })
+  const handleRegistration = ({ name, avatar, email, password }) => {
+    register({ name, avatar, email, password })
       .then((userData) => {
-        setCurrentUser(userData);
-        setIsLoggedIn(true);
-        closeActiveModal(); // Close the modal window
+        if (userData) {
+          handleLogin({ email, password });
+        }
       })
       .catch((error) => {
         console.error("Error registering user:", error);
@@ -77,24 +71,48 @@ function App() {
   };
 
   const handleLogin = ({ email, password }) => {
-    authorize(email, password)
+    authorize({ email, password })
       .then((data) => {
         if (data.token) {
           // Ensure the API returns `token`
           localStorage.setItem("jwt", data.token); // Store token
-          return getUserData(data.token); // Fetch user data
-        } else {
-          throw new Error("No token received from server");
+          getUserData(data.token) // Fetch user data
+            .then((userData) => {
+              setCurrentUser(userData);
+              setIsLoggedIn(true);
+              closeActiveModal(); // Close the modal window
+            });
         }
-      })
-      .then((userData) => {
-        setCurrentUser(userData);
-        setIsLoggedIn(true);
-        closeActiveModal(); // Close the modal window
       })
       .catch((error) => {
         console.error("Error logging in:", error);
       });
+  };
+
+  const handleCardLike = ({ id, isLiked }) => {
+    const token = localStorage.getItem("jwt");
+    // Check if this card is not currently liked
+    !isLiked
+      ? // if so, send a request to add the user's id to the card's likes array
+        api
+          // the first argument is the card's id
+          .addCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+          })
+          .catch((err) => console.log(err))
+      : // if not, send a request to remove the user's id from the card's likes array
+        api
+          // the first argument is the card's id
+          .removeCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+          })
+          .catch((err) => console.log(err));
   };
 
   // Function to handle opening Login modal
