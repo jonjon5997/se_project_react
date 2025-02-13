@@ -1,12 +1,12 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function ProtectedRoute({ element }) {
-  const { isLoggedIn } = useContext(CurrentUserContext);
+  const { isLoggedIn, isLoggedInLoading } = useContext(CurrentUserContext);
   const useLocation = useLocation();
 
-  if (!isLoggedIn) {
+  if (!isLoggedIn && !isLoggedInLoading) {
     // Redirect to the main page if not logged in
     return <Navigate to="/" />;
   }

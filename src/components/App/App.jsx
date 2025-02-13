@@ -10,6 +10,7 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import ProtectedRoute from "../ProtectedRoutes/ProtectedRoute";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import ClothesSection from "../Profile/ClothesSection/ClothesSection";
 import {
   getWeather,
   filterWeatherData,
@@ -40,6 +41,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null); // Store user data
   const [isLoginModalOpen, setLoginModalOpen] = useState(false); // Modal state for Login
   const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
+  const [isLoggedInLoading, setIsLoggedInLoading] = useState(true);
 
   const handleAddItem = (e, values) => {
     e.preventDefault();
@@ -131,34 +133,14 @@ function App() {
     setRegisterModalOpen(false);
   };
 
-  // const handleLogin = ({ email, password }) => {
-  //   authorize(email, password)
-  //     .then((data) => {
-  //       if (data.token) {
-  //         setToken(data.token);
-  //         return getUserData(data.token); // Fetch user data after login
-  //       }
-  //     })
-  //     .then((userData) => {
-  //       setCurrentUser(userData);
-  //       setIsLoggedIn(true);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error logging in user:", error);
-  //     });
-  // };
-
-  //   register({ name, avatar, email, password })
-  //     .then((data) => {
-  //       console.log("Registration successful:", data);
-  //       closeActiveModal(); // Close the modal after successful registration
-
-  //       return handleLogin({ email, password }); // Automatically log in the user
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error registering user:", error);
-  //     });
-  // };
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        console.log("Fetched items:", data); // Debugging step
+        setClothingItems(data); // ✅ Update state with fetched data
+      })
+      .catch((err) => console.error("Error fetching items:", err));
+  }, []);
 
   useEffect(() => {
     const jwt = getToken();
@@ -168,11 +150,13 @@ function App() {
       .then((data) => {
         setCurrentUser(data);
         setIsLoggedIn(true);
+        setIsLoggedInLoading(false);
       })
       .catch((error) => {
         console.error("Token validation failed:", error);
         removeToken();
         setIsLoggedIn(false);
+        setIsLoggedInLoading(false);
       });
   }, []);
 
@@ -274,7 +258,9 @@ function App() {
 
   return (
     <BrowserRouter>
-      <CurrentUserContext.Provider value={{ currentUser, isLoggedIn }}>
+      <CurrentUserContext.Provider
+        value={{ currentUser, isLoggedIn, isLoggedInLoading }}
+      >
         <div className="page">
           <CurrentTemperatureUnitContext.Provider
             value={{
@@ -294,6 +280,7 @@ function App() {
 
                 // onClick={openLoginModal && openRegisterModal}
               />
+
               <Routes>
                 <Route
                   path="/"
@@ -320,66 +307,15 @@ function App() {
                     />
                   }
                 />
-                {/* 
-                {isLoginModalOpen && (
-                  <Route
-                    path="/"
-                    element={
-                      <LoginModal
-                        closeModal={closeModals}
-                        handleLogin={setLoginModalOpen}
-                        isOpen={isLoginModalOpen}
-                      />
-                    }
-                  />
-                )}
-
-                {isRegisterModalOpen && (
-                  <Route
-                    path="/"
-                    element={
-                      <RegisterModal
-                        closeModal={closeModals}
-                        handleRegistration={setRegisterModalOpen}
-                        isOpen={isRegisterModalOpen}
-                      />
-                    }
-                  />
-                )} */}
-                {/* <Route
-                  path="/signin"
-                  element={
-                    <LoginModal
-                      handleLogin={handleLogin}
-                      closeModal={closeActiveModal}
-                    />
-                  }
-                />
-                <Route
-                  path="/signup"
-                  element={
-                    <RegisterModal
-                      handleRegistration={handleRegistration}
-                      closeModal={closeActiveModal}
-                    />
-                  }
-                /> */}
               </Routes>
+
+              <ClothesSection
+                onCardClick={handleCardClick}
+                clothingItems={clothingItems}
+                handleAddClick={handleAddClick}
+              />
               <Footer />
-              {/* {activeModal === "login" && (
-                <LoginModal
-                  handleLogin={handleLogin}
-                  closeModal={closeActiveModal}
-                  isOpen={isLoginModalOpen}
-                />
-              )}
-              {activeModal === "register" && (
-                <RegisterModal
-                  handleRegistration={handleRegistration}
-                  closeModal={closeActiveModal}
-                  isOpen={isRegisterModalOpen}
-                />
-              )} */}
+
               {isLoginModalOpen && (
                 <LoginModal
                   isOpen={isLoginModalOpen}

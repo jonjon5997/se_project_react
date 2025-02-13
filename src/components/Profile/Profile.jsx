@@ -10,6 +10,7 @@ function Profile({
   handleAddClick,
   currentUser,
   onUpdateUser,
+  handleCardClick,
 }) {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
 
@@ -35,7 +36,7 @@ function Profile({
       </section>
       <section className="profile__clothing-items">
         <ClothesSection
-          onCardClick={onCardClick}
+          onCardClick={handleCardClick}
           handleAddClick={handleAddClick}
           clothingItems={clothingItems}
         />
@@ -44,7 +45,7 @@ function Profile({
       {isEditProfileOpen && (
         <EditProfileModal
           isOpen={isEditProfileOpen}
-          onClose={() => setIsEditProfileOpen(false)}
+          onClose={handleCloseEditProfile}
           currentUser={currentUser}
           onUpdateUser={handleUpdateUser}
         />

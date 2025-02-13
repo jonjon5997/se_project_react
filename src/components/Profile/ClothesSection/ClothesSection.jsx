@@ -1,13 +1,16 @@
 import React from "react";
 import "./ClothesSection.css";
 import ItemCard from "../../ItemCard/ItemCard";
+import CurrentUserContext from "../../../contexts/CurrentUserContext";
+import { useContext } from "react";
 
 function ClothesSection({
   onCardClick,
   clothingItems,
   handleAddClick,
-  currentUser, // Ensure currentUser is passed as a prop
+  // Ensure currentUser is passed as a prop
 }) {
+  const { currentUser } = useContext(CurrentUserContext);
   if (!currentUser) {
     return <p>Loading...</p>; // Prevents errors if currentUser isn't loaded yet
   }

@@ -12,9 +12,15 @@ function request(url, options) {
 
 // Public endpoint (no auth needed)
 function getItems() {
-  return request(`${baseUrl}/items`);
+  return request(`${baseUrl}/items`)
+    .then((res) => {
+      console.log("Fetched items:", res); // Logs the fetched data
+      return res;
+    })
+    .catch((err) => {
+      console.error("Error fetching items:", err);
+    });
 }
-
 // Protected endpoints (require auth token)
 function addItem({ name, imageUrl, weather }) {
   const token = getToken(); // Retrieve token
