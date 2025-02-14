@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import "RegisterModal.css";
 
 function RegisterModal({ handleRegistration, closeModal, isOpen }) {
   const [name, setName] = useState("");
