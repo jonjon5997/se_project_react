@@ -26,7 +26,12 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { authorize, register, getUserData } from "../../utils/auth";
-import { getItems, addItem, deleteItem } from "../../utils/api";
+import {
+  getItems,
+  addItem,
+  deleteItem,
+  updateUserProfile,
+} from "../../utils/api";
 import { getToken, setToken, removeToken } from "../../utils/token";
 
 function App() {
@@ -302,6 +307,8 @@ function App() {
                           onCardClick={handleCardClick}
                           handleAddClick={handleAddClick}
                           clothingItems={clothingItems}
+                          currentUser={currentUser}
+                          onUpdateUser={updateUserProfile}
                         />
                       }
                     />
@@ -309,11 +316,11 @@ function App() {
                 />
               </Routes>
 
-              <ClothesSection
+              {/* <ClothesSection
                 onCardClick={handleCardClick}
                 clothingItems={clothingItems}
                 handleAddClick={handleAddClick}
-              />
+              /> */}
               <Footer />
 
               {isLoginModalOpen && (
