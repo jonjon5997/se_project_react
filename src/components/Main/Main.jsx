@@ -18,8 +18,8 @@ function Main({
     return <p>Loading weather data...</p>; // Or a loading spinner
   }
 
-  // const weatherType = weatherData.weatherType;
-  const weatherType = "sunny";
+  const weatherType = weatherData.weatherType;
+  // const weatherType = "sunny";
   console.log(weatherType);
 
   return (

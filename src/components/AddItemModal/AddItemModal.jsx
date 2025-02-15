@@ -22,7 +22,7 @@ const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
       buttonText="Add Garment"
       isOpen={isOpen} // This controls modal visibility
       handleCloseClick={closeActiveModal}
-      handleSubmit={handleSubmit} // Submit handler
+      onSubmit={handleSubmit} // Submit handler
     >
       <label htmlFor="name" className="modal__label">
         Name

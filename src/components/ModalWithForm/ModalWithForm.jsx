@@ -7,6 +7,7 @@ function ModalWithForm({
   isOpen,
   handleCloseClick,
   onSubmit,
+  // handleSubmit,
   // handleLogin,
   // handleRegistration,
 }) {
