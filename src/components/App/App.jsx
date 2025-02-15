@@ -217,6 +217,7 @@ function App() {
   };
 
   const handleAddClick = () => {
+    console.log("is this firing bro");
     setActiveModal("add-garment");
   };
 

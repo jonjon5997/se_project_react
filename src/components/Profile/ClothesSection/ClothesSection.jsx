@@ -14,7 +14,7 @@ function ClothesSection({
   if (!currentUser) {
     return <p>Loading...</p>; // Prevents errors if currentUser isn't loaded yet
   }
-
+  console.log(clothingItems);
   // Filter items to only show those added by the current user
   const userClothingItems = clothingItems.filter(
     (item) => item.owner === currentUser._id

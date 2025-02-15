@@ -42,3 +42,7 @@
   border: none;
   border-bottom: solid 2px black;
 }
+
+.modal_opened {
+  visibility: visible;
+}

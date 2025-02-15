@@ -13,12 +13,14 @@ function Main({
   handleCardLike,
 }) {
   const { currentTempUnit } = useContext(CurrentTemperatureUnitContext);
-
+  console.log(clothingItems);
   if (!weatherTemp || !weatherData) {
     return <p>Loading weather data...</p>; // Or a loading spinner
   }
 
-  const weatherType = weatherData.weatherType;
+  // const weatherType = weatherData.weatherType;
+  const weatherType = "sunny";
+  console.log(weatherType);
 
   return (
     <main>
