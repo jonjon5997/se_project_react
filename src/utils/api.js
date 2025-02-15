@@ -45,11 +45,11 @@ function deleteItem(id) {
 }
 
 function updateUserProfile(userData) {
-  return fetch(`${BASE_URL}/users/me`, {
+  return fetch(`${baseUrl}/users/me`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItems("token")}`, // Adjust based on your auth system
+      Authorization: `Bearer ${localStorage.getItem("token")}`, // Adjust based on your auth system
     },
     body: JSON.stringify(userData),
   }).then((res) => {
