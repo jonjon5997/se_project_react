@@ -28,7 +28,7 @@ function RegisterModal({ handleRegistration, closeModal, isOpen }) {
       className="modal__content modal_opened"
     >
       <div>
-        <h2>Register</h2>
+        {/* <h2>Register</h2> */}
 
         <label className="modal__form">
           Name:

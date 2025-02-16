@@ -46,3 +46,18 @@
 .modal_opened {
   visibility: visible;
 }
+
+.modal__secondary-button {
+  background: transparent;
+  border: none;
+  color: #00000080;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 20px;
+  display: flex;
+  position: absolute;
+  top: 211px;
+  left: 160px;
+
+  /* text-decoration: underline; */
+}

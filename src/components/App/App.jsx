@@ -130,6 +130,7 @@ function App() {
   // Function to handle opening Register modal
   const openRegisterModal = () => {
     setRegisterModalOpen(true);
+    setLoginModalOpen(false); // Close the login modal
   };
 
   // Function to handle closing all modals
@@ -262,6 +263,10 @@ function App() {
     setCurrentUser(null); // Clear user data
   };
 
+  const handleOpenRegisterModal = () => {
+    setActiveModal("register"); // Opens the register modal
+  };
+
   return (
     <BrowserRouter>
       <CurrentUserContext.Provider
@@ -329,6 +334,7 @@ function App() {
                   isOpen={isLoginModalOpen}
                   closeModal={closeModals}
                   handleLogin={handleLogin}
+                  openRegisterModal={openRegisterModal}
                 />
               )}
               {isRegisterModalOpen && (
