@@ -213,6 +213,7 @@ function App() {
   };
 
   const handleCardClick = (card) => {
+    console.log("Card clicked:", card); // Debugging log
     setActiveModal("preview");
     setSelectedCard(card);
   };
@@ -332,9 +333,9 @@ function App() {
               {isLoginModalOpen && (
                 <LoginModal
                   isOpen={isLoginModalOpen}
-                  closeModal={closeModals}
                   handleLogin={handleLogin}
                   openRegisterModal={openRegisterModal}
+                  closeModal={closeModals}
                 />
               )}
               {isRegisterModalOpen && (
