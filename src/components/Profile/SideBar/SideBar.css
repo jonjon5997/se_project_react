@@ -22,3 +22,23 @@
   padding-top: 16px;
   font-family: "Cabinet Grotesk", sans-serif;
 }
+
+.sidebar__edit-button {
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24.8px;
+  letter-spacing: 0%;
+  background-color: transparent;
+  border: none;
+}
+
+.sidebar__signout-button {
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24.8px;
+  letter-spacing: 0%;
+  background-color: transparent;
+  border: none;
+}

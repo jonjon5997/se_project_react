@@ -49,7 +49,7 @@ function updateUserProfile(userData) {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`, // Adjust based on your auth system
+      Authorization: `Bearer ${localStorage.getItem("jwt")}`, // Adjust based on your auth system
     },
     body: JSON.stringify(userData),
   }).then((res) => {

@@ -10,7 +10,7 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import ProtectedRoute from "../ProtectedRoutes/ProtectedRoute";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-import ClothesSection from "../Profile/ClothesSection/ClothesSection";
+
 import {
   getWeather,
   filterWeatherData,
@@ -316,6 +316,7 @@ function App() {
                           clothingItems={clothingItems}
                           currentUser={currentUser}
                           onUpdateUser={updateUserProfile}
+                          setCurrentUser={setCurrentUser}
                         />
                       }
                     />
@@ -323,11 +324,6 @@ function App() {
                 />
               </Routes>
 
-              {/* <ClothesSection
-                onCardClick={handleCardClick}
-                clothingItems={clothingItems}
-                handleAddClick={handleAddClick}
-              /> */}
               <Footer />
 
               {isLoginModalOpen && (
