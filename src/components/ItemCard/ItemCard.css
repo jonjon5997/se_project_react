@@ -52,6 +52,11 @@
   background-repeat: no-repeat;
   border: none;
   cursor: pointer;
+  display: flex;
+  position: absolute;
+  background-color: transparent;
+  top: 20px;
+  right: 100px;
 }
 
 .card__like-button_active {
