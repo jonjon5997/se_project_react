@@ -11,6 +11,7 @@ function Main({
   onCardClick,
   clothingItems,
   handleCardLike,
+  currentUser,
 }) {
   const { currentTempUnit } = useContext(CurrentTemperatureUnitContext);
   console.log(clothingItems);
@@ -21,6 +22,7 @@ function Main({
   const weatherType = weatherData.weatherType;
   // const weatherType = "sunny";
   console.log(weatherType);
+  console.log(currentUser);
 
   return (
     <main>
@@ -34,7 +36,13 @@ function Main({
           {clothingItems
             .filter((item) => item.weather === weatherType)
             .map((item) => (
-              <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+              <ItemCard
+                key={item._id}
+                item={item}
+                onCardClick={onCardClick}
+                handleCardLike={handleCardLike}
+                currentUser={currentUser}
+              />
             ))}
         </ul>
       </section>

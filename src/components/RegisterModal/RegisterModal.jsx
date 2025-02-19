@@ -2,7 +2,12 @@ import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./RegisterModal.css";
 
-function RegisterModal({ handleRegistration, closeModal, isOpen }) {
+function RegisterModal({
+  handleRegistration,
+  closeModal,
+  isOpen,
+  openLoginModal,
+}) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
   const [email, setEmail] = useState("");
@@ -21,10 +26,10 @@ function RegisterModal({ handleRegistration, closeModal, isOpen }) {
     <ModalWithForm
       title="Signup"
       buttonText="Signup"
-      isOpen={handleRegistration}
+      isOpen={isOpen}
       handleCloseClick={closeModal} // Ensure close works
       handleSubmit={handleSubmit} // Submit handler
-      handleRegistration={handleRegistration}
+      // handleRegistration={handleRegistration}
       className="modal__content modal_opened"
     >
       <div>
@@ -70,6 +75,13 @@ function RegisterModal({ handleRegistration, closeModal, isOpen }) {
             required
           />
         </label>
+        <button
+          type="button"
+          className="modal__secondary-button_type_register"
+          onClick={openLoginModal}
+        >
+          Or Log in
+        </button>
         {/* <button type="submit">Register</button> */}
 
         {/* <button onClick={closeModal}>Close</button> */}

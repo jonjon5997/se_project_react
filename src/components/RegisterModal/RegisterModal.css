@@ -46,3 +46,19 @@
 .modal_opened {
   visibility: visible;
 }
+
+.modal__secondary-button_type_register {
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  display: flex;
+  position: absolute;
+  top: 342px;
+  left: 160px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: #00000080;
+}

@@ -125,6 +125,8 @@ function App() {
 
   // Function to handle opening Login modal
   const openLoginModal = () => {
+    console.log("Opening login modal..."); // Debugging step
+    setRegisterModalOpen(false);
     setLoginModalOpen(true);
   };
 
@@ -208,6 +210,17 @@ function App() {
       document.removeEventListener("keydown", handleEscClose);
     };
   }, [activeModal]); // Only re-run if activeModal changes
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      getUserData(token)
+        .then((userData) => {
+          setCurrentUser(userData);
+        })
+        .catch((err) => console.error("Failed to fetch user data:", err));
+    }
+  }, []);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit((prevUnit) => (prevUnit === "F" ? "C" : "F"));
@@ -338,8 +351,10 @@ function App() {
               {isRegisterModalOpen && (
                 <RegisterModal
                   isOpen={isRegisterModalOpen}
-                  closeModal={closeModals}
                   handleRegistration={handleRegistration}
+                  // handleLogin={handleLogin}
+                  openLoginModal={openLoginModal}
+                  closeModal={closeModals}
                 />
               )}
             </div>
