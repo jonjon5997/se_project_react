@@ -70,6 +70,7 @@ function App() {
       .then((userData) => {
         if (userData) {
           handleLogin({ email, password });
+          // closeActiveModal();
         }
       })
       .catch((error) => {
@@ -87,7 +88,7 @@ function App() {
             .then((userData) => {
               setCurrentUser(userData);
               setIsLoggedIn(true);
-              closeActiveModal(); // Close the modal window
+              closeModals(); // Close the modal window
             });
         }
       })

@@ -3,7 +3,13 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./LoginModal.css";
 // import { useNavigate } from "react-router-dom";
 
-function LoginModal({ handleLogin, closeModal, isOpen, openRegisterModal }) {
+function LoginModal({
+  handleLogin,
+  closeModal,
+  isOpen,
+  openRegisterModal,
+  // activeModal,
+}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,7 +21,6 @@ function LoginModal({ handleLogin, closeModal, isOpen, openRegisterModal }) {
   };
 
   return (
-    // <div className="modal">
     <ModalWithForm
       title="Login"
       buttonText="Login"
@@ -52,7 +57,6 @@ function LoginModal({ handleLogin, closeModal, isOpen, openRegisterModal }) {
         Or Sign Up
       </button>
     </ModalWithForm>
-    // </div>
   );
 }
 
