@@ -31,8 +31,14 @@ import {
   addItem,
   deleteItem,
   updateUserProfile,
+  addCardLike,
+  removeCardLike,
 } from "../../utils/api";
+// import { addCardLike, removeCardLike } from "../../utils/api";
+// import api from "../../utils/api";
 import { getToken, setToken, removeToken } from "../../utils/token";
+// import api from "../../utils/api";
+// import { addCardLike, removeCardLike } from "../../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
@@ -97,14 +103,38 @@ function App() {
       });
   };
 
+  // const handleCardLike = ({ id, isLiked }) => {
+  //   const token = localStorage.getItem("jwt");
+  //   // Check if this card is not currently liked
+  //   !isLiked
+  //     ? // if so, send a request to add the user's id to the card's likes array
+  //       api
+  //         // the first argument is the card's id
+  //         .addCardLike(id, token)
+  //         .then((updatedCard) => {
+  //           setClothingItems((cards) =>
+  //             cards.map((item) => (item._id === id ? updatedCard : item))
+  //           );
+  //         })
+  //         .catch((err) => console.log(err))
+  //     : // if not, send a request to remove the user's id from the card's likes array
+  //       api
+  //         // the first argument is the card's id
+  //         .removeCardLike(id, token)
+  //         .then((updatedCard) => {
+  //           setClothingItems((cards) =>
+  //             cards.map((item) => (item._id === id ? updatedCard : item))
+  //           );
+  //         })
+  //         .catch((err) => console.log(err));
+  // };
+
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
     // Check if this card is not currently liked
     !isLiked
       ? // if so, send a request to add the user's id to the card's likes array
-        api
-          // the first argument is the card's id
-          .addCardLike(id, token)
+        addCardLike(id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
               cards.map((item) => (item._id === id ? updatedCard : item))
@@ -112,9 +142,7 @@ function App() {
           })
           .catch((err) => console.log(err))
       : // if not, send a request to remove the user's id from the card's likes array
-        api
-          // the first argument is the card's id
-          .removeCardLike(id, token)
+        removeCardLike(id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
               cards.map((item) => (item._id === id ? updatedCard : item))
@@ -316,6 +344,8 @@ function App() {
                       weatherData={weatherData}
                       onCardClick={handleCardClick}
                       clothingItems={clothingItems}
+                      currentUser={currentUser}
+                      handleCardLike={handleCardLike}
                     />
                   }
                 />

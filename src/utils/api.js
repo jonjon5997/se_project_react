@@ -2,6 +2,16 @@ import { getToken } from "./token";
 
 const baseUrl = "http://localhost:3001";
 
+// const api = {
+//   getItems,
+//   addItem,
+//   deleteItem,
+//   checkResponse,
+//   updateUserProfile,
+//   addCardLike,
+//   removeCardLike,
+// };
+
 function checkResponse(res) {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 }
@@ -60,4 +70,32 @@ function updateUserProfile(userData) {
   });
 }
 
-export { getItems, addItem, deleteItem, checkResponse, updateUserProfile };
+function addCardLike(id, token) {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
+}
+
+function removeCardLike(id, token) {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
+}
+
+export {
+  getItems,
+  addItem,
+  deleteItem,
+  checkResponse,
+  updateUserProfile,
+  addCardLike,
+  removeCardLike,
+};
+
+// export default api;

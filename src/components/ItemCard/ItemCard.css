@@ -45,6 +45,15 @@
   background-image: url("../../assets/like-button.png");
   width: 18px;
   height: 15px;
-  top: 300px;
-  left: 1279px;
+  width: 18px;
+  height: 15px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+}
+
+.card__like-button_active {
+  /* add styles here */
 }
