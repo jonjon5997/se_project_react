@@ -34,24 +34,27 @@ function EditProfileModal({ isOpen, onClose, currentUser, onUpdateUser }) {
 
   return (
     <ModalWithForm
-      title="Edit Profile"
+      title="Change profile data"
       buttonText={isLoading ? "Saving..." : "Save"} // ✅ Show loading state
       isOpen={isOpen}
       handleCloseClick={onClose}
       onSubmit={handleSubmit}
+      className="modal__content"
     >
-      <label>
-        Name:
+      <label className="modal__form">
+        Name *
         <input
+          className="modal__input"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
         />
       </label>
-      <label>
-        Avatar URL:
+      <label className="modal__form">
+        Avatar *
         <input
+          className="modal__input"
           type="url"
           value={avatar}
           onChange={(e) => setAvatar(e.target.value)}
