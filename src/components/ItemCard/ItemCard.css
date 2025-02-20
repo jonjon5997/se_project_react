@@ -60,5 +60,20 @@
 }
 
 .card__like-button_active {
-  /* add styles here */
+  background-image: url("../../assets/liked-button.png");
+  width: 18px;
+  height: 15px;
+  width: 18px;
+  height: 15px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  position: absolute;
+  background-color: transparent;
+  top: 20px;
+  right: 100px;
+  /* background-color: #000000; */
 }

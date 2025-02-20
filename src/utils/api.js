@@ -70,44 +70,13 @@ function updateUserProfile(userData) {
   });
 }
 
-// function addCardLike(id, token) {
-//   return (
-//     fetch(`${baseUrl}/items/${id}/likes`, {
-//       method: "PUT",
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     })
-//       .then(checkResponse);
-
-//   );
-// }
-
-// function removeCardLike(id, token) {
-//   return (
-//     fetch(`${baseUrl}/items/${id}/likes`, {
-//       method: "DELETE",
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     })
-//       .then(checkResponse);
-
-//   );
-// }
-
 function addCardLike(id, token) {
   return fetch(`${baseUrl}/items/${id}/likes`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  })
-    .then((res) => res.json()) // ✅ Ensure JSON is returned
-    .then((data) => {
-      console.log("API Like Response:", data);
-      return data;
-    });
+  }).then(checkResponse);
 }
 
 function removeCardLike(id, token) {
@@ -116,13 +85,36 @@ function removeCardLike(id, token) {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  })
-    .then((res) => res.json()) // ✅ Ensure JSON is returned
-    .then((data) => {
-      console.log("API Unlike Response:", data);
-      return data;
-    });
+  }).then(checkResponse);
 }
+
+// function addCardLike(id, token) {
+//   return fetch(`${baseUrl}/items/${id}/likes`, {
+//     method: "PUT",
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   })
+//     .then((res) => res.json()) // ✅ Ensure JSON is returned
+//     .then((data) => {
+//       console.log("API Like Response:", data);
+//       return data;
+//     });
+// }
+
+// function removeCardLike(id, token) {
+//   return fetch(`${baseUrl}/items/${id}/likes`, {
+//     method: "DELETE",
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   })
+//     .then((res) => res.json()) // ✅ Ensure JSON is returned
+//     .then((data) => {
+//       console.log("API Unlike Response:", data);
+//       return data;
+//     });
+// }
 
 export {
   getItems,

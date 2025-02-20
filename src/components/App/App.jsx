@@ -136,7 +136,7 @@ function App() {
 
         setClothingItems((prevItems) => {
           const updatedItems = prevItems.map((item) =>
-            item._id === id ? updatedCard : item
+            item._id === id ? updatedCard.data : item
           );
 
           console.log("Updated clothingItems:", updatedItems); // ✅ Check if the state updates correctly

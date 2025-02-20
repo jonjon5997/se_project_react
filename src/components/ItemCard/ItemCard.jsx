@@ -1,6 +1,7 @@
 import React from "react";
 import "./ItemCard.css";
 import likeButton from "../../assets/like-button.png";
+import likedButton from "../../assets/liked-button.png";
 
 function ItemCard({ item, onCardClick, handleCardLike, currentUser }) {
   const handleCardClick = () => {
@@ -38,7 +39,7 @@ function ItemCard({ item, onCardClick, handleCardLike, currentUser }) {
           className={`card__like-button ${
             isLiked ? "card__like-button_active" : ""
           }`}
-          style={{ backgroundImage: `url(${likeButton})` }}
+          style={{ backgroundImage: `url(${likeButton}) url(${likedButton})` }}
           onClick={handleLike}
         ></button>
       )}
