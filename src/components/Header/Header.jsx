@@ -69,12 +69,12 @@ function Header({
               )}
               {/* Link to the profile page */}
 
-              <button
+              {/* <button
                 className="header__signout-button"
                 onClick={handleSignOut}
               >
                 Sign Out
-              </button>
+              </button> */}
             </div>
           </>
         ) : (

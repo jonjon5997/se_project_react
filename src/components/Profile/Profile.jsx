@@ -11,8 +11,10 @@ function Profile({
   currentUser,
   onUpdateUser,
   handleCardClick,
+  handleCardLike,
   setCurrentUser, // Ensure this is available for logout logic
   setIsLoggedIn, // Ensure this is available for logout logic
+  handleSignOut,
 }) {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
 
@@ -29,10 +31,13 @@ function Profile({
     // onUpdateUser(updatedUser); // call parent function if needed
   };
 
-  const handleSignOut = () => {
-    localStorage.removeItem("jwt"); // Remove token
-    setCurrentUser(null); // Clear user data
-    setIsLoggedIn(false); // Update login state
+  // const handleSignOut = () => {
+  //   localStorage.removeItem("jwt"); // Remove token
+  //   setCurrentUser(null); // Clear user data
+  //   setIsLoggedIn(false); // Update login state
+  // };
+  const handleSignOutClick = () => {
+    handleSignOut(); // Call the sign-out function
   };
 
   return (
@@ -41,7 +46,7 @@ function Profile({
         <SideBar
           currentUser={currentUser}
           onEditProfile={handleEditProfileClick}
-          handleSignOut={handleSignOut} // Pass handleSignOut to SideBar
+          handleSignOut={handleSignOutClick} // Pass handleSignOut to SideBar
         />
       </section>
       <section className="profile__clothing-items">
@@ -49,6 +54,8 @@ function Profile({
           onCardClick={onCardClick}
           handleAddClick={handleAddClick}
           clothingItems={clothingItems}
+          currentUser={currentUser}
+          handleCardLike={handleCardLike}
         />
       </section>
       {/* Edit Profile Modal */}

@@ -356,6 +356,8 @@ function App() {
                           currentUser={currentUser}
                           onUpdateUser={updateUserProfile}
                           setCurrentUser={setCurrentUser}
+                          handleCardLike={handleCardLike}
+                          handleSignOut={handleSignOut}
                         />
                       }
                     />

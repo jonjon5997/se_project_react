@@ -8,6 +8,8 @@ function ClothesSection({
   onCardClick,
   clothingItems,
   handleAddClick,
+  handleCardLike,
+  // currentUser,
   // Ensure currentUser is passed as a prop
 }) {
   const { currentUser } = useContext(CurrentUserContext);
@@ -31,7 +33,13 @@ function ClothesSection({
       <ul className="clothes-section__items">
         {userClothingItems.length > 0 ? (
           userClothingItems.map((item) => (
-            <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+            <ItemCard
+              key={item._id}
+              item={item}
+              onCardClick={onCardClick}
+              handleCardLike={handleCardLike} // Ensure it's passed down
+              currentUser={currentUser}
+            />
           ))
         ) : (
           <p className="clothes-section__empty">
