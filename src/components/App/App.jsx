@@ -108,9 +108,7 @@ function App() {
   //   // Check if this card is not currently liked
   //   !isLiked
   //     ? // if so, send a request to add the user's id to the card's likes array
-  //       api
-  //         // the first argument is the card's id
-  //         .addCardLike(id, token)
+  //       addCardLike(id, token)
   //         .then((updatedCard) => {
   //           setClothingItems((cards) =>
   //             cards.map((item) => (item._id === id ? updatedCard : item))
@@ -118,9 +116,7 @@ function App() {
   //         })
   //         .catch((err) => console.log(err))
   //     : // if not, send a request to remove the user's id from the card's likes array
-  //       api
-  //         // the first argument is the card's id
-  //         .removeCardLike(id, token)
+  //       removeCardLike(id, token)
   //         .then((updatedCard) => {
   //           setClothingItems((cards) =>
   //             cards.map((item) => (item._id === id ? updatedCard : item))
@@ -131,24 +127,23 @@ function App() {
 
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
-    // Check if this card is not currently liked
-    !isLiked
-      ? // if so, send a request to add the user's id to the card's likes array
-        addCardLike(id, token)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
-            );
-          })
-          .catch((err) => console.log(err))
-      : // if not, send a request to remove the user's id from the card's likes array
-        removeCardLike(id, token)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
-            );
-          })
-          .catch((err) => console.log(err));
+
+    const likeRequest = !isLiked ? addCardLike : removeCardLike;
+
+    likeRequest(id, token)
+      .then((updatedCard) => {
+        console.log("Updated card:", updatedCard); // ✅ Debugging log
+
+        setClothingItems((prevItems) => {
+          const updatedItems = prevItems.map((item) =>
+            item._id === id ? updatedCard : item
+          );
+
+          console.log("Updated clothingItems:", updatedItems); // ✅ Check if the state updates correctly
+          return updatedItems;
+        });
+      })
+      .catch((err) => console.error("Error updating like:", err));
   };
 
   // Function to handle opening Login modal

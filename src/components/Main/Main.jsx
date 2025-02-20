@@ -21,7 +21,12 @@ function Main({
 
   const weatherType = weatherData.weatherType;
   // const weatherType = "sunny";
-  console.log(weatherType);
+  console.log("Weather Type:", weatherType);
+  console.log(
+    "Filtered Items:",
+    clothingItems.filter((item) => item.weather === weatherType)
+  );
+
   console.log(currentUser);
 
   return (
