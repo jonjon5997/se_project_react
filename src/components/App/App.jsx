@@ -278,7 +278,7 @@ function App() {
     };
     addItem(newItem)
       .then((addedItem) => {
-        setClothingItems((prevItems) => [addedItem, ...prevItems]);
+        setClothingItems((prevItems) => [addedItem.data, ...prevItems]);
         closeActiveModal();
         console.log("Item added successfully:", addedItem);
       })
