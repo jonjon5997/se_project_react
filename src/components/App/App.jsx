@@ -87,6 +87,7 @@ function App() {
   const handleLogin = ({ email, password }) => {
     authorize({ email, password })
       .then((data) => {
+        console.log("Login Response:", data); // Debugging log
         if (data.token) {
           // Ensure the API returns `token`
           localStorage.setItem("jwt", data.token); // Store token

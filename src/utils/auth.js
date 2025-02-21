@@ -1,4 +1,5 @@
 import { setToken, getToken } from "./token";
+import { checkResponse } from "./api";
 
 const API_URL = "http://localhost:3001";
 
@@ -47,8 +48,8 @@ function getUserData() {
   }).then(checkResponse);
 }
 
-function checkResponse(res) {
-  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-}
+// function checkResponse(res) {
+//   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+// }
 
 export { authorize, register, getUserData };
