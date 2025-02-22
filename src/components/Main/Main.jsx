@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 // import { defaultClothingItems } from "../../utils/constants";
 import ItemCard from "../ItemCard/ItemCard";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function Main({
   weatherTemp,
@@ -11,8 +12,9 @@ function Main({
   onCardClick,
   clothingItems,
   handleCardLike,
-  currentUser,
+  // currentUser,
 }) {
+  const { currentUser } = useContext(CurrentUserContext);
   const { currentTempUnit } = useContext(CurrentTemperatureUnitContext);
   console.log(clothingItems);
   if (!weatherTemp || !weatherData) {
