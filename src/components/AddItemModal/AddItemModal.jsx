@@ -15,7 +15,6 @@ const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
     onAddItem(e, { name, imageUrl, weather }); // Include all necessary fields
   };
 
-  console.log(handleSubmit);
   return (
     <ModalWithForm
       title="New Garment"

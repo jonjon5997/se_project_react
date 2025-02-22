@@ -53,26 +53,27 @@ function App() {
   const [isLoginModalOpen, setLoginModalOpen] = useState(false); // Modal state for Login
   const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
   const [isLoggedInLoading, setIsLoggedInLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleAddItem = (e, values) => {
-    e.preventDefault();
-    const newItem = {
-      name: values.name,
-      imageUrl: values.imageUrl,
-      weather: values.weather,
-    };
-    addItem(newItem)
-      .then((addedItem) => {
-        setClothingItems((prevItems) => [addedItem, ...prevItems]);
-        closeActiveModal();
-      })
-      .catch((error) => {
-        console.error("Error adding item:", error);
-      });
-  };
+  // const handleAddItem = (e, values) => {
+  //   e.preventDefault();
+  //   const newItem = {
+  //     name: values.name,
+  //     imageUrl: values.imageUrl,
+  //     weather: values.weather,
+  //   };
+  //   addItem(newItem)
+  //     .then((addedItem) => {
+  //       setClothingItems((prevItems) => [addedItem, ...prevItems]);
+  //       closeActiveModal();
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error adding item:", error);
+  //     });
+  // };
 
   const handleRegistration = ({ name, avatar, email, password }) => {
-    console.log("handleregister");
+    setIsLoading(true);
     register({ name, avatar, email, password })
       .then((userData) => {
         if (userData) {
@@ -82,10 +83,14 @@ function App() {
       })
       .catch((error) => {
         console.error("Error registering user:", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
   const handleLogin = ({ email, password }) => {
+    setIsLoading(true);
     authorize({ email, password })
       .then((data) => {
         console.log("Login Response:", data); // Debugging log
@@ -105,6 +110,9 @@ function App() {
       })
       .catch((error) => {
         console.error("Error logging in:", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -294,6 +302,7 @@ function App() {
 
   const onAddItem = (e, values) => {
     e.preventDefault();
+    setIsLoading(true);
     const newItem = {
       name: values.name,
       imageUrl: values.imageUrl,
@@ -307,10 +316,14 @@ function App() {
       })
       .catch((error) => {
         console.error("Error adding item:", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
   const handleDeleteItem = (id) => {
+    setIsLoading(true);
     deleteItem(id)
       .then(() => {
         setClothingItems((prevItems) =>
@@ -320,6 +333,9 @@ function App() {
       })
       .catch((error) => {
         console.error("Error deleting item:", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -367,7 +383,7 @@ function App() {
                       weatherData={weatherData}
                       onCardClick={handleCardClick}
                       clothingItems={clothingItems}
-                      currentUser={currentUser}
+                      // currentUser={currentUser}
                       handleCardLike={handleCardLike}
                     />
                   }
@@ -401,15 +417,16 @@ function App() {
                   handleLogin={handleLogin}
                   openRegisterModal={openRegisterModal}
                   closeModal={closeModals}
+                  buttonText={isLoading ? "Logging in..." : "Login"}
                 />
               )}
               {isRegisterModalOpen && (
                 <RegisterModal
                   isOpen={isRegisterModalOpen}
                   handleRegistration={handleRegistration}
-                  // handleLogin={handleLogin}
                   openLoginModal={openLoginModal}
                   closeModal={closeModals}
+                  buttonText={isLoading ? "Registering..." : "Register"}
                 />
               )}
             </div>
@@ -419,7 +436,7 @@ function App() {
                 closeActiveModal={closeActiveModal}
                 isOpen={activeModal === "add-garment"}
                 onAddItem={onAddItem}
-                handleAddItem={handleAddItem}
+                // handleAddItem={handleAddItem}
               />
             )}
             {activeModal === "preview" && (
