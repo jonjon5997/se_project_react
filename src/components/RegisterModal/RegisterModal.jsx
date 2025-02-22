@@ -15,6 +15,7 @@ function RegisterModal({
   // const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = (e) => {
+    console.log("submit");
     e.preventDefault();
     handleRegistration({ name, avatar, email, password });
   };
@@ -28,7 +29,7 @@ function RegisterModal({
       buttonText="Signup"
       isOpen={isOpen}
       handleCloseClick={closeModal} // Ensure close works
-      handleSubmit={handleSubmit} // Submit handler
+      onSubmit={handleSubmit} // Submit handler
       // handleRegistration={handleRegistration}
       className="modal__content modal_opened"
     >

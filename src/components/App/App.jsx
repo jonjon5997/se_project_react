@@ -72,6 +72,7 @@ function App() {
   };
 
   const handleRegistration = ({ name, avatar, email, password }) => {
+    console.log("handleregister");
     register({ name, avatar, email, password })
       .then((userData) => {
         if (userData) {
@@ -88,6 +89,9 @@ function App() {
     authorize({ email, password })
       .then((data) => {
         console.log("Login Response:", data); // Debugging log
+        if (!data || !data.token) {
+          throw new Error("No token received from API");
+        }
         if (data.token) {
           // Ensure the API returns `token`
           localStorage.setItem("jwt", data.token); // Store token
@@ -103,6 +107,29 @@ function App() {
         console.error("Error logging in:", error);
       });
   };
+
+  // const handleLogin = ({ email, password }) => {
+  //   authorize({ email, password })
+  //     .then((data) => {
+  //       console.log("Login Response:", data); // Debugging log
+  //       if (!data || !data.token) {
+  //         throw new Error("No token received from API");
+  //       }
+  //       if (data.token) {
+  //         // Ensure the API returns `token`
+  //         localStorage.setItem("jwt", data.token); // Store token
+  //         getUserData(data.token) // Fetch user data
+  //           .then((userData) => {
+  //             setCurrentUser(userData);
+  //             setIsLoggedIn(true);
+  //             closeModals(); // Close the modal window
+  //           });
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error logging in:", error);
+  //     });
+  // };
 
   // const handleCardLike = ({ id, isLiked }) => {
   //   const token = localStorage.getItem("jwt");

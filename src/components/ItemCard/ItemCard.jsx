@@ -22,9 +22,6 @@ function ItemCard({ item, onCardClick, handleCardLike, currentUser }) {
   // Create a variable which you then set in `className` for the like button
   const itemLikeButtonClassName = `...`;
 
-  console.log("Item:", item);
-  console.log("onCardClick:", onCardClick);
-
   return (
     <li className="card">
       <h2 className="card__name">{item.name || "No Name Available"}</h2>

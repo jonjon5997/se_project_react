@@ -11,17 +11,6 @@ function ModalWithForm({
   // handleLogin,
   // handleRegistration,
 }) {
-  console.log({
-    children,
-    buttonText,
-    title,
-    activeModal,
-    isOpen,
-    handleCloseClick,
-    onSubmit,
-    // handleLogin,
-    // handleRegistration,
-  });
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__content">

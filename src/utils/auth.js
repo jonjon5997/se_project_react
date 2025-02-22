@@ -5,6 +5,7 @@ const API_URL = "http://localhost:3001";
 
 // Register (No auth token needed)
 function register({ name, avatar, email, password }) {
+  console.log("register");
   return fetch(`${API_URL}/signup`, {
     method: "POST",
     headers: {
@@ -16,6 +17,23 @@ function register({ name, avatar, email, password }) {
 }
 
 // Login (No auth token needed)
+// function authorize({ email, password }) {
+//   return fetch(`${API_URL}/signin`, {
+//     method: "POST",
+//     headers: {
+//       Accept: "application/json",
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({ email, password }),
+//   })
+//     .then(checkResponse)
+//     .then((data) => {
+//       if (data.token) {
+//         setToken(data.token); // Save token
+//       }
+//       return data;
+//     });
+// }
 function authorize({ email, password }) {
   return fetch(`${API_URL}/signin`, {
     method: "POST",
@@ -25,11 +43,13 @@ function authorize({ email, password }) {
     },
     body: JSON.stringify({ email, password }),
   })
-    .then(checkResponse)
+    .then((res) => res.json())
     .then((data) => {
-      if (data.token) {
-        setToken(data.token); // Save token
+      console.log("API Response:", data); // Logs API response
+      if (!data.token) {
+        throw new Error("No token received from API");
       }
+      setToken(data.token); // Save token
       return data;
     });
 }
@@ -37,13 +57,14 @@ function authorize({ email, password }) {
 // Verify token and get user data (Requires token)
 function getUserData() {
   const token = getToken();
+  console.log("Token being sent:", token);
   if (!token) return Promise.reject("No token found");
 
   return fetch(`${API_URL}/users/me`, {
     method: "GET",
     headers: {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
     },
   }).then(checkResponse);
 }
