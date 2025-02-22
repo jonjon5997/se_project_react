@@ -34,8 +34,6 @@ function RegisterModal({
       className="modal__content modal_opened"
     >
       <div>
-        {/* <h2>Register</h2> */}
-
         <label className="modal__form">
           Name:
           <input
@@ -83,9 +81,6 @@ function RegisterModal({
         >
           Or Log in
         </button>
-        {/* <button type="submit">Register</button> */}
-
-        {/* <button onClick={closeModal}>Close</button> */}
       </div>
     </ModalWithForm>
     // </div>

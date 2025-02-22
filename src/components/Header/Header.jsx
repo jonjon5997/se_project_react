@@ -67,14 +67,6 @@ function Header({
                   {getInitials(currentUser?.name)}
                 </div>
               )}
-              {/* Link to the profile page */}
-
-              {/* <button
-                className="header__signout-button"
-                onClick={handleSignOut}
-              >
-                Sign Out
-              </button> */}
             </div>
           </>
         ) : (
