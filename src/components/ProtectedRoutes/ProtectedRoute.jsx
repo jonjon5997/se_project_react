@@ -1,28 +1,33 @@
-// import { Navigate } from "react-router-dom";
+// import { Navigate, useLocation } from "react-router-dom";
 // import { useContext } from "react";
 // import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 // function ProtectedRoute({ element }) {
 //   const { isLoggedIn, isLoggedInLoading } = useContext(CurrentUserContext);
-//   const useLocation = useLocation();
+//   const location = useLocation();
 
 //   if (!isLoggedIn && !isLoggedInLoading) {
-//     // Redirect to the main page if not logged in
-//     return <Navigate to="/" />;
+//     return <Navigate to="/" state={{ from: location }} replace />;
 //   }
 
-//   return element; // Render the protected component if logged in
+//   return <>{element}</>;
 // }
 
 // export default ProtectedRoute;
 
 import { Navigate, useLocation } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function ProtectedRoute({ element }) {
   const { isLoggedIn, isLoggedInLoading } = useContext(CurrentUserContext);
-  const location = useLocation(); // ✅ Corrected hook
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!isLoggedIn && !isLoggedInLoading) {
+      Navigate.to("/", { state: { from: location }, replace: true });
+    }
+  }, [isLoggedIn, isLoggedInLoading, location]);
 
   if (!isLoggedIn && !isLoggedInLoading) {
     return <Navigate to="/" state={{ from: location }} replace />;
