@@ -10,13 +10,8 @@ const ItemModal = ({ activeModal, handleCloseClick, card, onDeleteCard }) => {
   }
 
   const handleDeleteClick = () => {
-    onDeleteCard(card._id)
-      .then(() => {
-        handleCloseClick(); // Close the modal only after a successful deletion
-      })
-      .catch((err) => {
-        console.error("Error deleting card:", err); // Handle errors properly
-      });
+    onDeleteCard(card._id);
+    handleCloseClick(); // Close the modal after deletion
   };
 
   // Checking if the current user is the owner of the current clothing item

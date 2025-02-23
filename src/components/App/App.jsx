@@ -513,7 +513,7 @@ function App() {
   const handleSubmit = (request) => {
     setIsLoading(true);
     request()
-      .then(closeModals)
+      .then(closeModals && closeActiveModal)
       .catch((error) => console.error("Error:", error))
       .finally(() => setIsLoading(false));
   };
@@ -555,6 +555,7 @@ function App() {
           getUserData(data.token).then((userData) => {
             setCurrentUser(userData);
             setIsLoggedIn(true);
+            closeModals();
           });
         }
       });
