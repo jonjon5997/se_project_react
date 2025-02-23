@@ -96,19 +96,18 @@ function App() {
 
   const handleAddItem = (e, values) => {
     e.preventDefault();
+
     const newItem = {
       name: values.name,
       imageUrl: values.imageUrl,
       weather: values.weather,
     };
 
-    const makeRequest = () => {
-      return addItem(newItem).then((addedItem) => {
+    handleSubmit(() =>
+      addItem(newItem).then((addedItem) => {
         setClothingItems((prevItems) => [addedItem.data, ...prevItems]);
-      });
-    };
-
-    handleSubmit(makeRequest);
+      })
+    );
   };
 
   const handleRegistration = ({ name, avatar, email, password }) => {
@@ -327,9 +326,8 @@ function App() {
                           onCardClick={handleCardClick}
                           handleAddClick={handleAddClick}
                           clothingItems={clothingItems}
-                          currentUser={currentUser}
                           onUpdateUser={updateUserProfile}
-                          setCurrentUser={setCurrentUser}
+                          // setCurrentUser={setCurrentUser}
                           handleCardLike={handleCardLike}
                           handleSignOut={handleSignOut}
                         />
