@@ -1,16 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./ClothesSection.css";
 import ItemCard from "../../ItemCard/ItemCard";
 import CurrentUserContext from "../../../contexts/CurrentUserContext";
-import { useContext } from "react";
 
 function ClothesSection({
   onCardClick,
   clothingItems,
   handleAddClick,
   handleCardLike,
-  // currentUser,
-  // Ensure currentUser is passed as a prop
 }) {
   const { currentUser } = useContext(CurrentUserContext);
   if (!currentUser) {
@@ -38,7 +35,6 @@ function ClothesSection({
               item={item}
               onCardClick={onCardClick}
               handleCardLike={handleCardLike} // Ensure it's passed down
-              currentUser={currentUser}
             />
           ))
         ) : (

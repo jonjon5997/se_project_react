@@ -11,7 +11,6 @@ const ItemModal = ({ activeModal, handleCloseClick, card, onDeleteCard }) => {
 
   const handleDeleteClick = () => {
     onDeleteCard(card._id);
-    handleCloseClick(); // Close the modal after deletion
   };
 
   // Checking if the current user is the owner of the current clothing item

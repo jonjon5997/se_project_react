@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { updateUserProfile } from "../../utils/api";
 import "./EditProfileModal.css";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function EditProfileModal({ isOpen, onClose, currentUser, onUpdateUser }) {
+function EditProfileModal({ isOpen, onClose, onUpdateUser }) {
+  const { currentUser } = useContext(CurrentUserContext);
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
   const [isLoading, setIsLoading] = useState(false); // ✅ Define loading state

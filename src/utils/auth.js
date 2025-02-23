@@ -16,24 +16,7 @@ function register({ name, avatar, email, password }) {
   }).then(checkResponse);
 }
 
-// Login (No auth token needed)
-// function authorize({ email, password }) {
-//   return fetch(`${API_URL}/signin`, {
-//     method: "POST",
-//     headers: {
-//       Accept: "application/json",
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({ email, password }),
-//   })
-//     .then(checkResponse)
-//     .then((data) => {
-//       if (data.token) {
-//         setToken(data.token); // Save token
-//       }
-//       return data;
-//     });
-// }
+// Login no auth token needed
 function authorize({ email, password }) {
   return fetch(`${API_URL}/signin`, {
     method: "POST",
@@ -43,7 +26,7 @@ function authorize({ email, password }) {
     },
     body: JSON.stringify({ email, password }),
   })
-    .then((res) => res.json())
+    .then(checkResponse)
     .then((data) => {
       console.log("API Response:", data); // Logs API response
       if (!data.token) {
@@ -68,9 +51,5 @@ function getUserData() {
     },
   }).then(checkResponse);
 }
-
-// function checkResponse(res) {
-//   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-// }
 
 export { authorize, register, getUserData };

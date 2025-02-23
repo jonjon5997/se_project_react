@@ -40,7 +40,6 @@ function Profile({
     <div className="profile">
       <section className="profile__sidebar">
         <SideBar
-          currentUser={currentUser}
           onEditProfile={handleEditProfileClick}
           handleSignOut={handleSignOutClick} // Pass handleSignOut to SideBar
         />
@@ -50,7 +49,6 @@ function Profile({
           onCardClick={onCardClick}
           handleAddClick={handleAddClick}
           clothingItems={clothingItems}
-          // currentUser={currentUser}
           handleCardLike={handleCardLike}
         />
       </section>
@@ -58,7 +56,6 @@ function Profile({
         <EditProfileModal
           isOpen={isEditProfileOpen}
           onClose={handleCloseEditProfile}
-          currentUser={currentUser}
           onUpdateUser={handleUpdateUser}
         />
       )}

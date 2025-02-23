@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SideBar.css";
 
-function SideBar({ currentUser, onEditProfile, handleSignOut }) {
+function SideBar({ onEditProfile, handleSignOut }) {
+  const { currentUser } = useContext(CurrentUserContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
