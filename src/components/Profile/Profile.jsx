@@ -1,22 +1,22 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import "./Profile.css";
 import SideBar from "./SideBar/SideBar";
 import ClothesSection from "./ClothesSection/ClothesSection";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+// import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function Profile({
   onCardClick,
   clothingItems,
   handleAddClick,
   onUpdateUser,
-  handleCardClick,
+  // handleCardClick,
   handleCardLike,
-  // setCurrentUser, // Ensure this is available for logout logic
-  setIsLoggedIn, // Ensure this is available for logout logic
+  setCurrentUser, // Ensure this is available for logout logic
+  // setIsLoggedIn, // Ensure this is available for logout logic
   handleSignOut,
 }) {
-  const currentUser = useContext(CurrentUserContext);
+  // const currentUser = useContext(CurrentUserContext);
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
 
   const handleEditProfileClick = () => {
@@ -28,8 +28,8 @@ function Profile({
   };
 
   const handleUpdateUser = (updatedUser) => {
-    onUpdateUser(updatedUser); // Update the user in state
-    // onUpdateUser(updatedUser); // call parent function if needed
+    setCurrentUser(updatedUser); // Update the user in state
+    handleCloseEditProfile();
   };
 
   const handleSignOutClick = () => {

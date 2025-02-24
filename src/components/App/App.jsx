@@ -75,12 +75,12 @@ function App() {
   //     .finally(() => setIsLoading(false));
   // };
 
-  const handleSignOut = () => {
-    localStorage.removeItem("jwt");
-    setIsLoggedIn(false);
-    setCurrentUser(null);
-    // navigate("/", { replace: true });
-  };
+  // const handleSignOut = () => {
+  //   localStorage.removeItem("jwt");
+  //   setIsLoggedIn(false);
+  //   setCurrentUser(null);
+  //   // navigate("/", { replace: true });
+  // };
 
   // const handleSignOut = () => {
   //   const makeRequest = () => {
@@ -93,6 +93,19 @@ function App() {
 
   //   handleSubmit(makeRequest);
   // };
+
+  const handleSignOut = () => {
+    const makeRequest = () => {
+      return new Promise((resolve) => {
+        localStorage.removeItem("jwt");
+        setIsLoggedIn(false);
+        setCurrentUser(null);
+        resolve(); // Resolve the promise after performing the actions
+      });
+    };
+
+    handleSubmit(makeRequest);
+  };
 
   const handleAddItem = (e, values) => {
     e.preventDefault();
@@ -330,6 +343,8 @@ function App() {
                           // setCurrentUser={setCurrentUser}
                           handleCardLike={handleCardLike}
                           handleSignOut={handleSignOut}
+                          // onUpdateUser={setCurrentUser} // ✅ Pass setCurrentUser as a prop
+                          setCurrentUser={setCurrentUser} // ✅ Make sure it's explicitly passed
                         />
                       }
                     />

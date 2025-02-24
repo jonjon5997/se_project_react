@@ -12,18 +12,19 @@ function EditProfileModal({ isOpen, onClose, onUpdateUser }) {
 
   // Populate fields with current user data when modal opens
   useEffect(() => {
-    if (currentUser) {
-      setName(currentUser.name || "");
-      setAvatar(currentUser.avatar || "");
+    if (isOpen) {
+      setName(currentUser?.name || "");
+      setAvatar(currentUser?.avatar || "");
     }
-  }, [currentUser, isOpen]);
+  }, [isOpen]); // Depend on isOpen only
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // refresh page to reflect changes made in modal
     setIsLoading(true);
 
     updateUserProfile({ name, avatar })
       .then((updatedUser) => {
+        console.log("Updated User:", updatedUser); // Debugging log
         onUpdateUser(updatedUser); // Update state in parent component
         onClose(); // Close modal
       })
