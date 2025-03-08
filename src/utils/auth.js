@@ -1,12 +1,11 @@
 import { setToken, getToken } from "./token";
 import { checkResponse } from "./api";
-
-const API_URL = "http://localhost:3001";
+import { baseUrl } from "./constants";
 
 // Register (No auth token needed)
 function register({ name, avatar, email, password }) {
   console.log("register");
-  return fetch(`${API_URL}/signup`, {
+  return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -18,7 +17,7 @@ function register({ name, avatar, email, password }) {
 
 // Login no auth token needed
 function authorize({ email, password }) {
-  return fetch(`${API_URL}/signin`, {
+  return fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -43,7 +42,7 @@ function getUserData() {
   console.log("Token being sent:", token);
   if (!token) return Promise.reject("No token found");
 
-  return fetch(`${API_URL}/users/me`, {
+  return fetch(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,

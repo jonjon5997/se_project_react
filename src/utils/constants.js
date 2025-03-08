@@ -75,3 +75,8 @@ export const coordinates = {
 };
 
 export const APIkey = "8baa4d6a30fe45a40ee453a806c6ef4f";
+
+export const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.jonjy-wtwr.twilightparadox.com"
+    : "http://localhost:3001";
