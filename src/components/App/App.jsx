@@ -282,11 +282,11 @@ function App() {
     setActiveModal("");
   };
 
-  const handleDeleteItem = (id) => {
+  const handleDeleteItem = (itemId) => {
     const makeRequest = () => {
-      return deleteItem(id).then(() => {
+      return deleteItem(itemId).then(() => {
         setClothingItems((prevItems) =>
-          prevItems.filter((item) => item._id !== id)
+          prevItems.filter((item) => item._id !== itemId)
         );
       });
     };
